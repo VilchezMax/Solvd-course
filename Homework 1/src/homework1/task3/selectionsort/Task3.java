@@ -1,4 +1,4 @@
-package homework1.task1.task3.selectionsort;
+package homework1.task3.selectionsort;
 /*
 3) Task 3
 You have array of numbers [3, 7, 6, 13, 33, 9, -100, 25]

@@ -4,7 +4,7 @@ You have an array of numbers [3, 7, 6, 13, 33, 9, -100, 25]
 Print all the values of array using while loop.
 In the same loop find the biggest and the smallest value of an array and then print values afterwards.
  */
-package homework1.task1.task2;
+package homework1.task2;
 
 public class Task2 {
     public static void main(String[] args) {
