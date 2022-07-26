@@ -16,6 +16,8 @@ public class Adult extends Person{
         this.occupation="Unemployed";
         if(this.getOccupation().equals("Unemployed")){
             this.creditScore=0;
+        } else {
+            this.creditScore=10;
         }
     }
     public Adult(String name, int age, int idNumber, String occupation, int creditScore) {

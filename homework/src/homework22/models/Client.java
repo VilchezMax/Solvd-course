@@ -57,14 +57,24 @@ public class Client  extends Adult{
      * Access Banks account list, then searches for the account getting the index to search in the list
      * Then it evaluates the values
     */
+    public static Tier getTierOfClientAccount(Client client){
+        Tier tier=Bank.getAccountList()
+                .get(Account.findIndexByID(client.getAccountID()))
+                .getTier();
+
+        return tier;
+    }
 
     public static boolean checkEligibilityForCredit(Client client){
         boolean isElegible=false;
-        if (Bank.getAccountList()
-                .get(Account.findIndexByID(client.getAccountID()))
-                .getTier()!=Tier.bronze
-                || client.getCreditScore()>50){
+        Tier tier=getTierOfClientAccount(client);
+        if (tier!=Tier.bronze || client.getCreditScore()>50){
             isElegible=true;
+            System.out.println("With a creditScore of "+client.getCreditScore()+"\n"
+                              +" and an account of "+ tier+"\n"
+                              +client.getName()+" is elegible for a credit."+"\n"
+                              +"His tier grants him a discount of interest payments of -"
+                              +tier.getInterestDisc()+"%");
         }
         return isElegible;
     }
