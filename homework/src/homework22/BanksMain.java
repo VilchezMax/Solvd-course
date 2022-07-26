@@ -21,12 +21,16 @@ public class BanksMain {
 
          //*1) Create guest, check eligibility NOT POSSIBLE
         Guest guest1 = new Guest("Dzmitry",28,10,"Automation Engineer",100);
-        guest1.isElegibilityForCredit();
+        if (guest1.isElegibilityForCredit()==false){
+            System.out.println("You are a guest, you need an account to ask for a credit");
+        }
          //*2) Create Client 1, check eligibility NOT POSSIBLE, bronze and <50
         Account account1=new Account(754963, Tier.bronze,0.99);
         Client client1 = new Client("Max",27,38789789,"QA TA Engineer",
                             49,11,account1.getAccountID(),false,"Solvd Arg HQ");
-        Client.checkEligibilityForCredit(client1);
+        if (Client.checkEligibilityForCredit(client1)==false){
+            System.out.println("Your credit score is too low");
+        }
          //*3) Create Client 2, check eligibility YES, tier:solvd
         // 3.A) CREATE METHOD TO CALCULATE MAX AMOUNT OF CREDIT DEPENDING TIER
         //  3.b) USE THAT ACCOUNT AND ADD CREDIT TO BALANCE.
@@ -36,7 +40,12 @@ public class BanksMain {
         Account account2 = new Account(7893148,Tier.solvd,1234567.89);
         Client client2 = new Client("Sergei",30,12,"Team lead QA",
                             400,80,account2.getAccountID(),true,"Solvd Main HQ");
-        Client.checkEligibilityForCredit(client2);
+        if (Client.checkEligibilityForCredit(client2)==false){
+            System.out.println("Your credit score is too low");
+        } else {
+            System.out.println("You will be granted the credit.");
+
+        }
          //*4) Client 2 deposits in account. account + balance
          //*5) Cliente 2 transfers to Client 1
          //*6)
