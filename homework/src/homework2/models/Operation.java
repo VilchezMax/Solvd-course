@@ -1,4 +1,4 @@
-package homework22.models;
+package homework2.models;
 
 import java.util.ArrayList;
 import java.util.Objects;

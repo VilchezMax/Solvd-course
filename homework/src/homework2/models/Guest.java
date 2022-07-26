@@ -1,4 +1,4 @@
-package homework22.models;
+package homework2.models;
 
 public class Guest extends Adult{
     //ATTRIBUTES

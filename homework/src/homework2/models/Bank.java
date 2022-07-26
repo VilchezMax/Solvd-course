@@ -1,48 +1,49 @@
 package homework2.models;
-/*
-import homework22.models.Tier;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Bank {
-    private String name;
+    //ATTRIBUTES
+    private final String name;
     private String network;
-    private ArrayList<Account> accounts;
-    private ArrayList<Procedure> procedures;
+    private static ArrayList<Account> accountList=new ArrayList<>();
+    private static ArrayList<Operation> operationList=new ArrayList<>();
 
-    public Bank(String name, String network){
-        this.name = name;
-        this.network = network;
-        this.accounts=new ArrayList<>();
-        this.procedures=new ArrayList<>();
+    //CONSTRUCTOR
+    public Bank() {
+        this.name="SolvBank";
+        this.network="Solvdift";
     }
 
+    //GETTERS & SETTERS
+    public String getName() {
+        return name;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public static ArrayList<Account> getAccountList() {
+        return accountList;
+    }
+
+    public static void addAccount(Account acc) {
+        Bank.accountList.add(acc);
+    }
+
+    public static ArrayList<Operation> getOperationList() {
+        return operationList;
+    }
+
+    public static void addOperation(Operation op) {
+        Bank.operationList.add(op);
+    }
 
     //METHODS
-    public static int generateAccountID(ArrayList<Account> accountList){
-        boolean newID=false;
-        int id = 0;
-        while (!newID){
-            id =(int) Math.random()*1000;
-            for (Account a:accountList){
-                if(a.getAccountID()==id){
-                    newID=false;
-                    break;
-                }
-                newID=true;
-            }
-        }
-        return id;
-    }
-
-    public static boolean checkEligibilityForCredit(Client client){
-        boolean isElegible=false;
-        if (client.getTier()!= Tier.bronze || client.getCreditScore()>50){
-            isElegible=true;
-        }
-        return isElegible;
-    }
 
 }
-*/

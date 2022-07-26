@@ -1,4 +1,4 @@
-package homework22.models;
+package homework2.models;
 
 public class Credit extends Operation{
     //ATTRIBUTES
@@ -59,8 +59,7 @@ public class Credit extends Operation{
     }
 
     //METHODS
-
-    public double calculateMaxAmount(int borrowingAccountID) {
+    public static double calculateMaxAmount(int borrowingAccountID) {
         double maxAmount = 0;
         Account acc = Bank.getAccountList().get(Account.findIndexByID(borrowingAccountID));
         Tier tier = acc.getTier();
@@ -68,11 +67,8 @@ public class Credit extends Operation{
         return maxAmount;
     }
 
-    public double calculateInstallment(int amount,int borrowingAccountID, double monthlyInterest,int months){
-        double insta=0;
-
-        insta=(amount/months)*getMonthlyInterest();
-
+    public static double calculateInstallment(int amount,int borrowingAccountID, double monthlyInterest,int months,Credit credit){
+        double insta=(amount/months)+((amount/months)*credit.getMonthlyInterest());
         return insta;
     }
 

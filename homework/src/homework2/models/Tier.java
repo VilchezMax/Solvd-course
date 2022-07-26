@@ -1,4 +1,4 @@
-package homework22.models;
+package homework2.models;
 
 public enum Tier{
     bronze(0,100,2),

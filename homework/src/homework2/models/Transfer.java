@@ -1,30 +1,57 @@
 package homework2.models;
-/*
-public class Transfer extends Procedure{
-    int initial;
-    int destination;
+
+public class Transfer extends Operation{
+         //ATTRIBUTES
+        int originAccountID;
+        int destinationAccountID;
+        double maxAmount;
+
+        //CONSTRUCTOR
+
+        public Transfer(int originAccountID, int destinationAccountID) {
+            this.originAccountID = originAccountID;
+            this.destinationAccountID = destinationAccountID;
+            this.maxAmount = Bank.getAccountList().get(Account.findIndexByID(originAccountID)).getBalance();;
+        }
 
 
-    public Transfer(int procedureID, boolean interNetwork, double amount,int initial, int destination) {
-        super(procedureID, interNetwork, amount);
-        this.initial=initial;
-        this.destination=destination;
+    //SETTERS & GETTERS
+
+    public int getOriginAccountID() {
+        return originAccountID;
     }
 
-    public int getInitial() {
-        return initial;
+    public void setOriginAccountID(int originAccountID) {
+        this.originAccountID = originAccountID;
     }
 
-    public void setInitial(int initial) {
-        this.initial = initial;
+    public int getDestinationAccountID() {
+        return destinationAccountID;
     }
 
-    public int getDestination() {
-        return destination;
+    public void setDestinationAccountID(int destinationAccountID) {
+        this.destinationAccountID = destinationAccountID;
     }
 
-    public void setDestination(int destination) {
-        this.destination = destination;
+    public double getMaxAmount() {
+        return maxAmount;
+    }
+
+    public void setMaxAmount(double maxAmount) {
+        this.maxAmount = maxAmount;
+    }
+
+    //METHODS
+    public void transfer(double amount){
+            Account accOrigin=Bank.getAccountList().get(
+                              Account.findIndexByID(originAccountID));
+            Account accDestination=Bank.getAccountList().get(
+                              Account.findIndexByID(destinationAccountID));
+            if (amount<this.maxAmount){
+                accOrigin.setBalance(accOrigin.getBalance()-amount);
+                accDestination.setBalance(accDestination.getBalance()+amount);
+            } else {
+                throw new IllegalArgumentException("Amount transferred can't be larger than account balance");
+            }
     }
 }
-*/

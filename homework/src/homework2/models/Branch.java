@@ -1,23 +1,27 @@
 package homework2.models;
-/*
+
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Branch extends Bank{
-    ArrayList<Client> clients;
-    String address;
+    //ATTRIBUTES
+    private static ArrayList<Client> clientList;
+    private String address;
 
-    public Branch(String name, String network,String address) {
-        super(name, network);
-        ArrayList<Client> clients = new ArrayList();
-        this.address=address;
+    //CONSTRUCTOR
+    public Branch(String address) {
+        super();
+        this.address = address;
+        this.clientList=new ArrayList<>();
+    }
+    //SETTERS & GETTERS
+    public ArrayList<Client> getClientList() {
+        return clientList;
     }
 
-    public ArrayList<Client> getClients() {
-        return clients; //TODO: do a forEach?
-    }
-
-    public void addClients(Client client) {
-        clients.add(client);
+    public void addClient(Client client) {
+        this.clientList.add(client);
     }
 
     public String getAddress() {
@@ -29,5 +33,17 @@ public class Branch extends Bank{
     }
 
     //METHODS
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Branch branch = (Branch) o;
+        return address.equals(branch.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(address);
+    }
 }
-*/

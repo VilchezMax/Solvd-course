@@ -1,4 +1,4 @@
-package homework22.models;
+package homework2.models;
 
 public abstract class Person {
     //ATTRIBUTES
@@ -44,8 +44,8 @@ public abstract class Person {
     @Override
     public String toString() {
         return  "Person {" +
-                "Name= " + this.name + '\'' +
-                "Age= " + this.age +
+                "Name= " + this.name + '\n' +
+                "Age= " + this.age + '\n' +
                 "ID= " + this.idNumber +
                 '}';
     }

@@ -1,42 +1,36 @@
 package homework2.models;
 
-/*
-public class Client extends Adult{
+public class Client  extends Adult{
     //ATTRIBUTES
-    private int clientID;
+    private final int clientID;
+    private final int accountID;
     private boolean eligibilityForCredit;
-    private Account accountID;
-    private Tier tier;
-    private Branch mainBranch;
+    private String mainBranchAddress;
 
-    //CONSTRUCTOR
-    public Client(String name, int age, int idNumber, String occupation,int creditScore,
-                  int clientID,boolean eligibilityForCredit, Account accountID,
-                  Branch mainBranch) {
+    //CONSTRUCTORS
+    public Client(int clientID, boolean eligibilityForCredit, String mainBranchAddress) {
+        this.clientID = clientID;
+        this.accountID = Account.findMaxID(Bank.getAccountList())+1;
+        this.eligibilityForCredit = eligibilityForCredit;
+        this.mainBranchAddress = mainBranchAddress;
+    }
+
+    public Client(String name, int age, int idNumber, String occupation, int creditScore, int clientID, int accountID, boolean eligibilityForCredit, String mainBranchAddress) {
         super(name, age, idNumber, occupation, creditScore);
-        this.clientID=clientID;
-        this.eligibilityForCredit=eligibilityForCredit;
-        this.accountID=accountID;
-        if(this.getCreditScore()<100){
-            this.tier=Tier.bronze;
-        } else if (this.getCreditScore()<200){
-            this.tier=Tier.silver;
-        } else if (this.getCreditScore()<300){
-            this.tier=Tier.golden;
-        } else {
-            this.tier=Tier.solvd;
-        }
-        //TODO QUESTION: IT IS INITIALIZING ITS STATE BUT IS IMPLEMENTING THIS KIND OF LOGIC IN CONSTRUCTOR WRONG?
-        this.mainBranch=mainBranch;
+        this.clientID = clientID;
+        this.accountID = accountID;
+        this.eligibilityForCredit = eligibilityForCredit;
+        this.mainBranchAddress = mainBranchAddress;
     }
 
     //SETTERS & GETTERS
+
     public int getClientID() {
         return clientID;
     }
 
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
+    public int getAccountID() {
+        return accountID;
     }
 
     public boolean isEligibilityForCredit() {
@@ -47,53 +41,39 @@ public class Client extends Adult{
         this.eligibilityForCredit = eligibilityForCredit;
     }
 
-    public Account getAccountID() {
-        return accountID;
+    public String getMainBranchAddress() {
+        return mainBranchAddress;
     }
 
-    public void setAccountID(Account accountID) {
-        this.accountID = accountID;
-    }
-
-    public Tier getTier() {
-        return tier;
-    }
-
-    public void setTier(Tier tier) {
-        this.tier = tier;
-    }
-
-    public Branch getMainBranch() {
-        return mainBranch;
-    }
-
-    public void setMainBranch(Branch mainBranch) {
-        this.mainBranch = mainBranch;
+    public void setMainBranch(String mainBranchAddress) {
+        this.mainBranchAddress = mainBranchAddress;
     }
 
     //METHODS
-    //Checks creditScore and upgrades if able.
-    public void upgradeTier(){
-        if (this.getCreditScore()>this.tier.getMaxScore() && tier!=Tier.solvd){
-            for(Tier t:Tier.values()){
-                if(this.getCreditScore()<t.getMaxScore()){
-                    this.tier=t;
-                    System.out.println("Upgraded to "+t+"\n"
-                                       +"Interest discount: -"
-                                       +t.getDisc()+"%"+"\n");
-                    break;
-                }
-            }
-        } else {
-            System.out.println("Can't upgrade tier");
-        }
-    }
-    public void transfer(int procedureID,Account initialAccount, Account finalAccount){
-        Transfer trans = new Transfer(Bank.generateAccountID(),true,1000.00,83839,282839); //TODO: GENERATE PROCEDURE ID
-    }
-    public void deposit(int procedureID,Account initialAccount, Account finalAccount){
+    /*
+     * Checks creditScore of client/Tier of clients account to determine if its eligible for credit.
+     * Access Banks account list, then searches for the account getting the index to search in the list
+     * Then it evaluates the values
+    */
+    public static Tier getTierOfClientAccount(Client client){
+        Tier tier=Bank.getAccountList()
+                .get(Account.findIndexByID(client.getAccountID()))
+                .getTier();
 
+        return tier;
+    }
+
+    public static boolean checkEligibilityForCredit(Client client){
+        boolean isElegible=false;
+        Tier tier=getTierOfClientAccount(client);
+        if (tier!=Tier.bronze || client.getCreditScore()>50){
+            isElegible=true;
+            System.out.println("With a creditScore of "+client.getCreditScore()+"\n"
+                              +"and a "+tier+" account,"+"\n"
+                              +client.getName()+" is elegible for a credit."+"\n"
+                              +"Your tier grants you a discount of interest payments of -"
+                              +tier.getInterestDisc()+"%");
+        }
+        return isElegible;
     }
 }
-
-*/
