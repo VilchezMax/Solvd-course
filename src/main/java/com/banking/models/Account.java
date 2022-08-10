@@ -1,4 +1,4 @@
-package homework2.models;
+package com.banking.models;
 
 import java.util.ArrayList;
 import java.util.Objects;

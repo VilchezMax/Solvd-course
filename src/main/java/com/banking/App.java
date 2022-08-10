@@ -1,36 +1,28 @@
-package homework2;
+package com.banking;
 
-import homework2.models.*;
+import com.banking.models.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
-import static homework2.models.Tier.BRONZE;
-import static homework2.models.Tier.SOLVD;
+import static com.banking.models.Tier.BRONZE;
+import static com.banking.models.Tier.SOLVD;
 
-/*
- * TODO LIST:
- *  IMPORTANT: REFACTOR HIERARCHIES AS SERGEI SAID ON CLASS 3 VIDEO 26/07.
- *          Guest att/meths are incomplete, should be elegible for credit and validated
- *          why minor exist if it cant extend client/guest? doesnt do anything. Add a Tier for minor accounts.
- *          better to implement class Person, extend to Workers/clients
- *          Because if class is guest, cant turn into client, its better being an attribute "account null or xxxx"
- *          if account null => guest
- *          if guest => no credit
- *  IMPORTANT: REFACTOR STATIC METHODS TO INSTANCE METHODS WHEN APPROPIATE.
- *      i.e: Client.checkEligibilityForCredit(client); -> client.checkEliginilityForCredit();
- *      Static methods use them to search parameter on lists, better.
- *  IMPORTANT: min 1:06:00 - Use interNetwork attribute for valdiations.
- *  fix Sergei TIER in Account2, it prints BRONZE, it should print SOLVD.
- *  fix amount offered for credit. it is way too large. search for mistake, so many 0's it prints "E".
- *  move Credit to Operation Menu.
- */
-
-public class Main {
+public class App {
     static Scanner keyboardInput = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    private static final Logger logger = LogManager.getLogger(App.class);
+
+    public static void main( String[] args ) {
+        System.out.println( "Hello World!" );
+        logger.trace("Entering application.");
+        logger.trace("Exiting application.");
+        logger.trace("trace");
+        logger.info("info");
+        logger.warn("warn");
         printLine();
-        //MOCK STRUCTURES TO FILL ARRAYLISTS
+
         Bank.addAccount(new Account(147859));
         Bank.addAccount(new Account(143945));
 
@@ -51,6 +43,7 @@ public class Main {
         Bank.addAccount(account2);
         Client client2 = new Client("Sergei", 30, 12, "Team lead QA",
                 400, 80, account2.getAccountID(), true, "Solvd Main HQ");
+
         if (!Client.checkEligibilityForCredit(client2)) {
             System.out.println("Your credit score is too low");
         } else {
@@ -58,7 +51,7 @@ public class Main {
             Credit credit1 = new Credit(account2.getAccountID());
             printLine();
             System.out.println("Max Amount is " + Credit.calculateMaxAmount(account2.getAccountID())
-                    + "How much do you wanna borrow?");
+                    + "How much do you want to borrow?");
             int amount = keyboardInput.nextInt();
             printLine();
             System.out.println("How many months do you want to pay it for?");
@@ -78,7 +71,13 @@ public class Main {
         double amount;
         while (option != 0) {
             System.out.println("What else do you want to do now? 1-Deposit | 2-Transfer | Other-Exit");
-            option = keyboardInput.nextInt();
+            try {
+                option = keyboardInput.nextInt();
+            } catch (IllegalArgumentException e) {
+                System.out.println("You have to input a number" + e);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             switch (option) {
                 case 1: //DEPOSIT
                     printLine();
@@ -121,4 +120,5 @@ public class Main {
     public static void printLine() {
         System.out.println("-----------------------------------------------------");
     }
+
 }

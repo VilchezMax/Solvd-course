@@ -1,4 +1,4 @@
-package homework2.models;
+package com.banking.models;
 
 public class Credit extends Operation{
     //ATTRIBUTES

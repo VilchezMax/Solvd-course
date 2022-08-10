@@ -1,14 +1,13 @@
-package homework2.models;
+package com.banking.models;
 
 import java.util.Objects;
 
-public class Minor extends Person{
+public class Minor extends Person {
     //ATTRIBUTES
     private int studentID;
     private String school;
 
     //CONSTRUCTORS
-
     public Minor(String name, int age, int idNumber, int studentID, String school) {
         super(name, age, idNumber);
         this.studentID = studentID;

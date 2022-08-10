@@ -1,4 +1,4 @@
-package homework2.models;
+package com.banking.models;
 
 public enum Tier {
     BRONZE(0, 100, 2),
