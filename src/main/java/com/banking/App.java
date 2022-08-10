@@ -11,7 +11,9 @@ import static com.banking.models.Tier.BRONZE;
 import static com.banking.models.Tier.SOLVD;
 
 public class App {
+
     static Scanner keyboardInput = new Scanner(System.in);
+
     static int maxTries;
     static {
         maxTries=3;
@@ -19,23 +21,18 @@ public class App {
     private static final Logger logger = LogManager.getLogger(App.class);
 
     public static void main( String[] args ) {
-
-        System.out.println( "Hello World!" );
         logger.trace("Entering application.");
         logger.trace("Exiting application.");
-        logger.trace("trace");
-        logger.info("info");
-        logger.warn("warn");
-        printLine();
+            printLine();
 
         Bank.addAccount(new Account(147859));
         Bank.addAccount(new Account(143945));
 
         Guest guest1 = new Guest("Dzmitry", 28, 10, "Automation Engineer", 100);
-        if (guest1.isElegibilityForCredit() == false) {
+        if (!guest1.isElegibilityForCredit()) {
             System.out.println(guest1.getName() + ", you are a guest, you need an account to ask for a credit.");
         }
-        printLine();
+            printLine();
         Account account1 = new Account(754963, BRONZE, 0.99);
         Bank.addAccount(account1);
         Client client1 = new Client("Max", 27, 38789789, "QA TA Engineer",
@@ -43,7 +40,7 @@ public class App {
         if (!Client.checkEligibilityForCredit(client1)) {
             System.out.println(client1.getName() + ", your credit score of " + client1.getCreditScore() + " is too low.");
         }
-        printLine();
+            printLine();
         Account account2 = new Account(7893148, SOLVD, 12345.89);
         Bank.addAccount(account2);
         Client client2 = new Client("Sergei", 30, 12, "Team lead QA",
@@ -54,24 +51,28 @@ public class App {
         } else {
             System.out.println("You will be granted the credit.");
             Credit credit1 = new Credit(account2.getAccountID());
-            printLine();
+                printLine();
             System.out.println("Max Amount is " + Credit.calculateMaxAmount(account2.getAccountID())
                     + "How much do you want to borrow?");
             int tries=0;
-            int amount;
+            int amount=0;
             while(tries<maxTries){
                 try{
                     amount = keyboardInput.nextInt();
                     break;
                 } catch (InputMismatchException e) {
                     tries++;
-                    System.out.println("You have to enter a number, "+(maxTries-tries)+" tries left."+e);
+                    System.out.println((maxTries-tries)+" tries left.\n"+e);
+                    logger.info("Wrong user input",e);
+                    if(tries==maxTries){
+                     logger.warn("User maxed out input tries("+maxTries+") ",e);
+                    }
                 }
             }
-            printLine();
+                printLine();
             System.out.println("How many months do you want to pay it for?");
             int months = keyboardInput.nextInt();
-            printLine();
+                printLine();
             System.out.println("Installments will be: " + Credit.calculateInstallment(
                     amount, account2.getAccountID(), credit1.getMonthlyInterest(), months, credit1
             ) + "/month");
@@ -91,11 +92,11 @@ public class App {
             } catch (IllegalArgumentException e) {
                 System.out.println("You have to input a number" + e);
             } catch (Exception e) {
-                System.out.println(e);
+                throw e;
             }
             switch (option) {
                 case 1: //DEPOSIT
-                    printLine();
+                        printLine();
                     System.out.println("Deposit into your account");
                     Deposit deposit1 = new Deposit(account2.getAccountID());
                     System.out.println("How much?");
@@ -104,27 +105,27 @@ public class App {
                     deposit1.setAmount(amount);
                     deposit1.deposit();
                     System.out.println("New Balance=" + account2.getBalance());
-                    printLine();
+                        printLine();
                     break;
 
                 case 2: //TRANSFER
-                    printLine();
+                        printLine();
                     System.out.println("What is the account on the receiving end?");
                     int destinationAccount = keyboardInput.nextInt();
                     Transfer transfer1 = new Transfer(account2.getAccountID(), destinationAccount);
                     System.out.println("How much? Maximum is: " + transfer1.getMaxAmount());
                     amount = keyboardInput.nextDouble();
                     transfer1.transfer(amount);
-                    printLine();
+                        printLine();
                     System.out.println("$" + amount + " sent to Account " + destinationAccount);
-                    printLine();
+                        printLine();
                     System.out.println("Account " + account2.getAccountID());
                     System.out.println("New Balance = " + account2.getBalance());
 
                 default: //EXIT
-                    printLine();
+                        printLine();
                     System.out.println("Thank you for trusting SolvdBank, where quality is assured");
-                    printLine();
+                        printLine();
                     option = 0;
                     break;
             }
