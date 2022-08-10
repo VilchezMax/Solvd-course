@@ -4,6 +4,7 @@ import com.banking.models.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.banking.models.Tier.BRONZE;
@@ -11,12 +12,14 @@ import static com.banking.models.Tier.SOLVD;
 
 public class App {
     static Scanner keyboardInput = new Scanner(System.in);
-    static{
-        int maxTries=3;
+    static int maxTries;
+    static {
+        maxTries=3;
     }
     private static final Logger logger = LogManager.getLogger(App.class);
 
     public static void main( String[] args ) {
+
         System.out.println( "Hello World!" );
         logger.trace("Entering application.");
         logger.trace("Exiting application.");
@@ -54,7 +57,17 @@ public class App {
             printLine();
             System.out.println("Max Amount is " + Credit.calculateMaxAmount(account2.getAccountID())
                     + "How much do you want to borrow?");
-            int amount = keyboardInput.nextInt();
+            int tries=0;
+            int amount;
+            while(tries<maxTries){
+                try{
+                    amount = keyboardInput.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    tries++;
+                    System.out.println("You have to enter a number, "+(maxTries-tries)+" tries left."+e);
+                }
+            }
             printLine();
             System.out.println("How many months do you want to pay it for?");
             int months = keyboardInput.nextInt();
