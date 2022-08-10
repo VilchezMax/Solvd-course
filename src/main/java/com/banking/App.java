@@ -11,7 +11,9 @@ import static com.banking.models.Tier.SOLVD;
 
 public class App {
     static Scanner keyboardInput = new Scanner(System.in);
-
+    static{
+        int maxTries=3;
+    }
     private static final Logger logger = LogManager.getLogger(App.class);
 
     public static void main( String[] args ) {
