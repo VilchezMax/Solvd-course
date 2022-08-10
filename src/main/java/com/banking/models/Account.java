@@ -11,18 +11,19 @@ public class Account {
     private Client client = null;
 
     //CONSTRUCTOR
-
-    public Account(int accountID, Tier tier, double balance) {
-        this.accountID = accountID;
-        this.tier = Tier.BRONZE;
-        this.balance = balance;
-    }
-
     public Account(int accountID) {
         this.accountID = accountID;
         this.tier = Tier.BRONZE;
         this.balance = 0;
     }
+
+    public Account(int accountID, Tier tier, double balance) {
+        this.accountID = accountID;
+        this.tier = tier;
+        this.balance = balance;
+    }
+
+
 
 
     //GETTERS & SETTERS
