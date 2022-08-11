@@ -1,0 +1,6 @@
+package com.banking.models.humans;
+
+import com.banking.interfaces.IResign;
+
+public class BankWorker extends Person implements IResign {
+}

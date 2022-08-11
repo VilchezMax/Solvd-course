@@ -1,4 +1,4 @@
-package com.banking.models;
+package com.banking.models.humans;
 
 import java.util.Objects;
 

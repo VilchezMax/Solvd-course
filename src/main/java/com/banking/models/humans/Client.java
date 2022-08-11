@@ -1,6 +1,11 @@
-package com.banking.models;
+package com.banking.models.humans;
 
-public class Client extends Adult {
+import com.banking.interfaces.IResign;
+import com.banking.models.Account;
+import com.banking.models.Bank;
+import com.banking.models.Tier;
+
+public class Client extends Adult implements IResign {
     //ATTRIBUTES
     private final int clientID;
     private final int accountID;

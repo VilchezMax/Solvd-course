@@ -1,5 +1,7 @@
 package com.banking.models;
 
+import com.banking.models.humans.Client;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,8 +24,6 @@ public class Account {
         this.tier = tier;
         this.balance = balance;
     }
-
-
 
 
     //GETTERS & SETTERS

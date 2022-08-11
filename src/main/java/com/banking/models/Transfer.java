@@ -8,7 +8,7 @@ public class Transfer extends Operation{
 
         //CONSTRUCTOR
 
-        public Transfer(int originAccountID, int destinationAccountID) {
+    public Transfer(int originAccountID, int destinationAccountID) {
             this.originAccountID = originAccountID;
             this.destinationAccountID = destinationAccountID;
             this.maxAmount = Bank.getAccountList().get(Account.findIndexByID(originAccountID)).getBalance();;

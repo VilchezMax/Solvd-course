@@ -1,4 +1,4 @@
-package com.banking.models;
+package com.banking.models.humans;
 
 public abstract class Person {
     //ATTRIBUTES

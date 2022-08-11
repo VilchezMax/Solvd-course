@@ -1,6 +1,8 @@
 package com.banking;
 
 import com.banking.models.*;
+import com.banking.models.humans.Client;
+import com.banking.models.humans.Guest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
