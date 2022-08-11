@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class Doorman extends BankWorker{
+public class BankDoorman extends BankWorker{
     Queue<Person> bankQueue = new PriorityQueue<>(100, new Comparator<Person>() {
 
         /* Priorities:
