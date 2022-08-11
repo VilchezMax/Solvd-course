@@ -1,5 +1,6 @@
 package com.banking.models.humans;
 
+
 import com.banking.interfaces.IResign;
 import com.banking.models.Account;
 import com.banking.models.Bank;
@@ -80,5 +81,10 @@ public class Client extends Adult implements IResign {
                     + tier.getInterestDisc() + "%");
         }
         return isElegible;
+    }
+
+    @Override
+    public void resign() {
+
     }
 }

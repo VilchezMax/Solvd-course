@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class BankDoorman extends BankWorker{
+public final class BankDoorman extends BankWorker{
     Queue<Person> bankQueue = new PriorityQueue<>(100, new Comparator<Person>() {
 
         /* Priorities:
@@ -50,5 +50,11 @@ public class BankDoorman extends BankWorker{
         }
     });
 
+    public Queue<Person> getBankQueue() {
+        return bankQueue;
+    }
 
+    public void setBankQueue(Queue<Person> bankQueue) {
+        this.bankQueue = bankQueue;
+    }
 }

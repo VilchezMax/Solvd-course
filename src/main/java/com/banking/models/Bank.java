@@ -1,7 +1,10 @@
 package com.banking.models;
 
-import java.util.ArrayList;
-import java.util.Queue;
+
+import com.banking.models.humans.BankWorker;
+import com.banking.models.humans.Client;
+
+import java.util.*;
 
 public class Bank {
     //ATTRIBUTES
@@ -9,6 +12,8 @@ public class Bank {
     private String network;
     private static ArrayList<Account> accountList=new ArrayList<>();
     private static ArrayList<Operation> operationList=new ArrayList<>();
+    private static Set<BankWorker> bankWorkerSet =new HashSet<>();
+    private static Map<Integer, Client> AccountIDClientMap = new HashMap<>();
 
     //CONSTRUCTOR
     public Bank() {
