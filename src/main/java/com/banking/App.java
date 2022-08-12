@@ -37,9 +37,11 @@ public class App {
             }
         } catch (InvalidOperationException e){
             logger.warn("You are a guest, you need an account to ask for a credit",e);
+
         }
         printLine();
-        //Client with
+
+        //Client with low credit
         Account account1 = new Account(754963, Tier.BRONZE, 0.99);
         Bank.addAccount(account1);
         Client client1 = new Client("Max", 27, 38789789, "QA TA Engineer",
@@ -48,16 +50,19 @@ public class App {
             System.out.println(client1.getName() + ", your credit score of " + client1.getCreditScore() + " is too low.");
         }
         printLine();
+
+        //Adding client that tests methods
         Account account2 = new Account(7893148, Tier.SOLVD, 12345.89);
         Bank.addAccount(account2);
         Client client2 = new Client("Sergei", 30, 12, "Team lead QA",
                 400, 80, account2.getAccountID(), true, "Solvd Main HQ");
+        account2.setClient(client2);
 
         //OPTIONS MENU
         int option = 1;
         double amount;
         while (option != 0) {
-            System.out.println("What do you want to do? \n" +
+            System.out.println("Hello "+account2.getClient().getName()+". What do you want to do? \n" +
                                "1-CHECK BALANCE | 2-CREDIT | 3-DEPOSIT | 4-TRANSFER | other-EXIT");
             try {
                 option = keyboardInput.nextInt();
@@ -71,6 +76,7 @@ public class App {
                 case 1: //CHECK BALANCE
                     double balance = Bank.getAccountList().get(Account.findIndexByID(client2.getAccountID())).getBalance();
                     System.out.println("your balance is : "+balance); //TODO: getAccountByID
+                    printLine();
                     break;
                 case 2: //CREDIT
                     if (!client2.checkEligibilityForCredit()) {
@@ -130,6 +136,9 @@ public class App {
                     deposit1.deposit();
                     System.out.println("New Balance=" + account2.getBalance());
                     printLine();
+                    if(amount>1000){
+                        logger.log(Level.forName("POLICE",350),"Inform POLICE of $"+amount+" movement");
+                    }
                     break;
 
                 case 4: //TRANSFER
@@ -146,7 +155,7 @@ public class App {
                     System.out.println("Account " + account2.getAccountID());
                     System.out.println("New Balance = " + account2.getBalance());
 
-                    if(amount>10000){
+                    if(amount>1000){
                         logger.log(Level.forName("POLICE",350),"Inform POLICE of $"+amount+" movement");
                     }
 

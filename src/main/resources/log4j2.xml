@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" name="App">
+
     <CustomLevels>
         <CustomLevel name="POLICE" intLevel="350" />
     </CustomLevels>
+
     <Appenders>
         <File name="log" fileName="./logs/log-${date:yyyy-MM-dd_HHmmssSSS}.log">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
+
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout>
-            <Pattern>"%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"</Pattern>
+            <Pattern>"%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"</Pattern>
             </PatternLayout>
         </Console>
+
     </Appenders>
     <Loggers>
-        <Logger name="Console" level="info">
-            <AppenderRef ref="Console"/>
-        </Logger>
         <Root level="info">
             <AppenderRef ref="log"/>
+            <AppenderRef ref="Console"/>
         </Root>
+
     </Loggers>
 </Configuration>

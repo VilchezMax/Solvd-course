@@ -1,0 +1,5 @@
+10:28:11.022 [main] INFO  com.banking.App - Entering application.
+10:28:11.026 [main] WARN  com.banking.App - You are a guest, you need an account to ask for a credit
+com.banking.exceptions.InvalidOperationException: InvalidOperationException, you have to choose a valid operation
+	at com.banking.App.main(App.java:36) ~[classes/:?]
+10:30:17.355 [main] INFO  com.banking.App - Exiting application.
