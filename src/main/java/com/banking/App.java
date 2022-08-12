@@ -1,7 +1,6 @@
 package com.banking;
 
 import com.banking.exceptions.AmountException;
-import com.banking.exceptions.InvalidOperationException;
 import com.banking.models.*;
 import com.banking.models.humans.Client;
 import com.banking.models.humans.Guest;
@@ -17,12 +16,14 @@ public class App {
     static Scanner keyboardInput = new Scanner(System.in);
 
     static int maxTries;
+
     static {
-        maxTries=3;
+        maxTries = 3;
     }
+
     private static final Logger logger = LogManager.getLogger(App.class);
 
-    public static void main( String[] args ){
+    public static void main(String[] args) {
         logger.info("Entering application.");
         printLine();
 
@@ -31,13 +32,8 @@ public class App {
 
         //Guest tries to take a credit.
         Guest guest1 = new Guest("Dzmitry", 28, 10, "Automation Engineer", 100);
-        try{
-            if (!guest1.isElegibileForCredit()) {
-                throw new InvalidOperationException();
-            }
-        } catch (InvalidOperationException e){
-            logger.warn("You are a guest, you need an account to ask for a credit",e);
-
+        if (!guest1.isElegibileForCredit()) {
+            logger.warn("You are a guest, you need an account to ask for a credit");
         }
         printLine();
 
@@ -62,8 +58,8 @@ public class App {
         int option = 1;
         double amount;
         while (option != 0) {
-            System.out.println("Hello "+account2.getClient().getName()+". What do you want to do? \n" +
-                               "1-CHECK BALANCE | 2-CREDIT | 3-DEPOSIT | 4-TRANSFER | other-EXIT");
+            System.out.println("Hello " + account2.getClient().getName() + ". What do you want to do? \n" +
+                    "1-CHECK BALANCE | 2-CREDIT | 3-DEPOSIT | 4-TRANSFER | other-EXIT");
             try {
                 option = keyboardInput.nextInt();
             } catch (IllegalArgumentException e) {
@@ -75,7 +71,7 @@ public class App {
             switch (option) {
                 case 1: //CHECK BALANCE
                     double balance = Bank.getAccountList().get(Account.findIndexByID(client2.getAccountID())).getBalance();
-                    System.out.println("your balance is : "+balance); //TODO: getAccountByID
+                    System.out.println("your balance is : " + balance); //TODO: getAccountByID
                     printLine();
                     break;
                 case 2: //CREDIT
@@ -89,21 +85,21 @@ public class App {
                         //STEP 1: CHOOSE AMOUNT
                         System.out.println("Max amount is " + Credit.calculateMaxAmount(account2.getAccountID())
                                 + ". How much do you want to borrow?");
-                        int tries=0;
-                        int creditAmount=0;
-                        while(tries<maxTries){
-                            try{
+                        int tries = 0;
+                        int creditAmount = 0;
+                        while (tries < maxTries) {
+                            try {
                                 creditAmount = keyboardInput.nextInt();
-                                if(creditAmount > Credit.calculateMaxAmount(account2.getAccountID())){
+                                if (creditAmount > Credit.calculateMaxAmount(account2.getAccountID())) {
                                     throw new AmountException();
                                 }
                                 break;
                             } catch (InputMismatchException e) {
                                 tries++;
-                                System.out.println((maxTries-tries)+" tries left.\n"+e);
-                                logger.info("Wrong user input",e);
-                                if(tries==maxTries){
-                                    logger.warn("User maxed out input tries("+maxTries+") ",e);
+                                System.out.println((maxTries - tries) + " tries left.\n" + e);
+                                logger.info("Wrong user input", e);
+                                if (tries == maxTries) {
+                                    logger.warn("User maxed out input tries(" + maxTries + ") ", e);
                                 }
                             } catch (AmountException e) {
                                 logger.warn(e);
@@ -136,8 +132,8 @@ public class App {
                     deposit1.deposit();
                     System.out.println("New Balance=" + account2.getBalance());
                     printLine();
-                    if(amount>1000){
-                        logger.log(Level.forName("POLICE",350),"Inform POLICE of $"+amount+" movement");
+                    if (amount > 1000) {
+                        logger.log(Level.forName("POLICE", 350), "Inform POLICE of $" + amount + " movement");
                     }
                     break;
 
@@ -155,8 +151,8 @@ public class App {
                     System.out.println("Account " + account2.getAccountID());
                     System.out.println("New Balance = " + account2.getBalance());
 
-                    if(amount>1000){
-                        logger.log(Level.forName("POLICE",350),"Inform POLICE of $"+amount+" movement");
+                    if (amount > 1000) {
+                        logger.log(Level.forName("POLICE", 350), "Inform POLICE of $" + amount + " movement");
                     }
 
                 default: //EXIT
