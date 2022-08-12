@@ -1,7 +1,7 @@
-.idea/
+.idea
+logs
 desktop.ini
 SOLVD.iml
-*/out
-out/
-**.iml
+out
 target
+homework.md
