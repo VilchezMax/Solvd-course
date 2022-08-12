@@ -1,5 +1,7 @@
 package com.banking.models.humans;
 
+import java.util.Objects;
+
 public abstract class Person {
     //ATTRIBUTES
     private String name;
@@ -41,6 +43,9 @@ public abstract class Person {
     }
 
     //METHODS
+
+    //TODO: ABSTRACT METHOD TO JUSTIFY ABSTRACT IN CLASS DECLARATION
+
     @Override
     public String toString() {
         return  "Person {" +
@@ -48,5 +53,18 @@ public abstract class Person {
                 "Age= " + this.age + '\n' +
                 "ID= " + this.idNumber +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return idNumber == person.idNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idNumber);
     }
 }

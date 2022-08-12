@@ -63,7 +63,7 @@ public class Credit extends Operation{
         double maxAmount = 0;
         Account acc = Bank.getAccountList().get(Account.findIndexByID(borrowingAccountID));
         Tier tier = acc.getTier();
-        maxAmount = acc.getAccountID() * tier.getMaxAmountMultiplier();
+        maxAmount = acc.getBalance() * tier.getMaxAmountMultiplier();
         return maxAmount;
     }
 

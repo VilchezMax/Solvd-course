@@ -1,10 +1,13 @@
 package com.banking.models.humans;
 
 
+import com.banking.exceptions.UnregisteredException;
 import com.banking.interfaces.IResign;
 import com.banking.models.Account;
 import com.banking.models.Bank;
 import com.banking.models.Tier;
+
+import java.util.ArrayList;
 
 public class Client extends Adult implements IResign {
     //ATTRIBUTES
@@ -69,22 +72,33 @@ public class Client extends Adult implements IResign {
         return tier;
     }
 
-    public static boolean checkEligibilityForCredit(Client client) {
+    public boolean checkEligibilityForCredit() {
         boolean isElegible = false;
-        Tier tier = getTierOfClientAccount(client);
-        if (tier != Tier.BRONZE || client.getCreditScore() > 50) {
+        Tier tier = getTierOfClientAccount(this);
+        if (tier != Tier.BRONZE || this.getCreditScore() > 50) {
             isElegible = true;
-            System.out.println("With a creditScore of " + client.getCreditScore() + "\n"
-                    + "and a " + tier + " account," + "\n"
-                    + client.getName() + " is elegible for a credit." + "\n"
-                    + "Your tier grants you a discount of interest payments of -"
-                    + tier.getInterestDisc() + "%");
+            System.out.println("With a creditScore of " + this.getCreditScore() + " and a " + tier + " account," + "\n"
+                                + this.getName() + " is elegible for a credit." + "\n"
+                                + "Your tier grants you a discount on interest payments of -"
+                                + tier.getInterestDisc() + "%");
         }
         return isElegible;
     }
 
     @Override
-    public void resign() {
+    public void resign() throws UnregisteredException{
+        int index=Account.findIndexByID(this.getAccountID());
 
+        if (Bank.getAccountList().contains(this)){
+            Bank.getAccountList().remove(index);
+        }
+        if (Bank.getAccountIDClientMap().containsKey(Integer.valueOf(this.getAccountID()))){
+            Bank.getAccountIDClientMap().remove(Integer.valueOf(this.getAccountID()),this);
+        }
+        System.gc();
+        /*TODO: ASK SERGEI -
+         * How to delete an object from inside? cant write "this = null".
+         * how to delete reference to object so garbage collector deletes it?
+         */
     }
 }

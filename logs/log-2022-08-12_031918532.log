@@ -1,0 +1,30 @@
+03:19:18.672 [main] INFO  com.banking.App - Entering application.
+03:19:24.576 [main] WARN  com.banking.App - com.banking.exceptions.AmountException: InvalidAmountException, The amount chosen is larger than available
+03:19:29.589 [main] INFO  com.banking.App - Wrong user input
+java.util.InputMismatchException: null
+	at java.util.Scanner.throwFor(Scanner.java:939) ~[?:?]
+	at java.util.Scanner.next(Scanner.java:1594) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2258) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2212) ~[?:?]
+	at com.banking.App.main(App.java:60) ~[classes/:?]
+03:19:29.604 [main] INFO  com.banking.App - Wrong user input
+java.util.InputMismatchException: null
+	at java.util.Scanner.throwFor(Scanner.java:939) ~[?:?]
+	at java.util.Scanner.next(Scanner.java:1594) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2258) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2212) ~[?:?]
+	at com.banking.App.main(App.java:60) ~[classes/:?]
+03:19:29.604 [main] INFO  com.banking.App - Wrong user input
+java.util.InputMismatchException: null
+	at java.util.Scanner.throwFor(Scanner.java:939) ~[?:?]
+	at java.util.Scanner.next(Scanner.java:1594) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2258) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2212) ~[?:?]
+	at com.banking.App.main(App.java:60) ~[classes/:?]
+03:19:29.604 [main] WARN  com.banking.App - User maxed out input tries(3) 
+java.util.InputMismatchException: null
+	at java.util.Scanner.throwFor(Scanner.java:939) ~[?:?]
+	at java.util.Scanner.next(Scanner.java:1594) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2258) ~[?:?]
+	at java.util.Scanner.nextInt(Scanner.java:2212) ~[?:?]
+	at com.banking.App.main(App.java:60) ~[classes/:?]

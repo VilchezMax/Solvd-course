@@ -12,7 +12,7 @@ public class Adult extends Person{
         super();
         this.setName("");
         this.setAge(18);
-        this.setIdNumber((int) Math.random()*100000000);
+        this.setIdNumber((int) Math.random()*1000000);
         this.occupation="Unemployed";
         if(this.getOccupation().equals("Unemployed")){
             this.creditScore=0;
