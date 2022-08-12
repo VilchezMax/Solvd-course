@@ -1,5 +1,7 @@
 package com.banking.models;
 
+import com.banking.exceptions.UnregisteredException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -61,7 +63,7 @@ public class Operation {
         return max;
     }
     //Finds index of operationID in the Bank's list of OperationIDs
-    public static int findIndexByID(int opID){
+    public static int findIndexByID(int opID)  throws UnregisteredException {
         int index=-1;
         for(Operation op:Bank.getOperationList()){
             if(op.getOpID()==opID){

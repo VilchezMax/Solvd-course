@@ -50,6 +50,22 @@ public class Bank {
         Bank.operationList.add(op);
     }
 
+    public static Set<BankWorker> getBankWorkerSet() {
+        return bankWorkerSet;
+    }
+
+    public static void setBankWorkerSet(Set<BankWorker> bankWorkerSet) {
+        Bank.bankWorkerSet = bankWorkerSet;
+    }
+
+    public static Map<Integer, Client> getAccountIDClientMap() {
+        return AccountIDClientMap;
+    }
+
+    public static void setAccountIDClientMap(Map<Integer, Client> accountIDClientMap) {
+        AccountIDClientMap = accountIDClientMap;
+    }
+
     //METHODS
 
 }
