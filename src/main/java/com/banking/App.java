@@ -26,9 +26,14 @@ public class App {
     public static void main(String[] args) {
         logger.info("Entering application.");
         printLine();
+        Bank solvdBank = new Bank();
 
-        Bank.addAccount(new Account(147859));
-        Bank.addAccount(new Account(143945));
+        solvdBank.getAccountList().add(new Account(1));
+        solvdBank.getAccountList().add(new Account(2, Tier.SOLVD, 100000));
+        solvdBank.getAccountList().add(new Account(3, Tier.GOLDEN, 15000));
+        solvdBank.getAccountList().add(new Account(4, Tier.SILVER, 10000));
+        solvdBank.getAccountList().add(new Account(5, Tier.BRONZE, 5000));
+
 
         //Guest tries to take a credit.
         Guest guest1 = new Guest("Dzmitry", 28, 10, "Automation Engineer", 100);
@@ -37,11 +42,13 @@ public class App {
         }
         printLine();
 
-        //Client with low credit
+        //Client with low credit score
         Account account1 = new Account(754963, Tier.BRONZE, 0.99);
-        Bank.addAccount(account1);
-        Client client1 = new Client("Max", 27, 38789789, "QA TA Engineer",
-                49, 11, account1.getAccountID(), false, "Solvd Arg HQ");
+
+        solvdBank.getAccountList().add(account1);
+        Client client1 = new Client("Max", 27, 38789789,
+                "QA TA Engineer", 49, 11,
+                account1, false, "Solvd Arg HQ");
         if (!client1.checkEligibilityForCredit()) {
             System.out.println(client1.getName() + ", your credit score of " + client1.getCreditScore() + " is too low.");
         }
@@ -49,7 +56,7 @@ public class App {
 
         //Adding client that tests methods
         Account account2 = new Account(7893148, Tier.SOLVD, 12345.89);
-        Bank.addAccount(account2);
+        solvdBank.getAccountList().add(account2);
         Client client2 = new Client("Sergei", 30, 12, "Team lead QA",
                 400, 80, account2.getAccountID(), true, "Solvd Main HQ");
         account2.setClient(client2);
@@ -70,7 +77,7 @@ public class App {
 
             switch (option) {
                 case 1: //CHECK BALANCE
-                    double balance = Bank.getAccountList().get(Account.findIndexByID(client2.getAccountID())).getBalance();
+                    double balance = Bank.getAccountList().get(Account.findIndexByID(client2.getAccount())).getBalance();
                     System.out.println("your balance is : " + balance); //TODO: getAccountByID
                     printLine();
                     break;

@@ -1,6 +1,5 @@
 package com.banking.models;
 
-
 import com.banking.models.humans.Client;
 
 import java.util.ArrayList;
@@ -24,6 +23,13 @@ public class Account {
         this.accountID = accountID;
         this.tier = tier;
         this.balance = balance;
+    }
+
+    public Account(int accountID, Tier tier, double balance, Client client) {
+        this.accountID = accountID;
+        this.tier = tier;
+        this.balance = balance;
+        this.client = client;
     }
 
 
@@ -79,9 +85,9 @@ public class Account {
     }
 
     //Finds highest ID in Bank list
-    public static int findMaxID(ArrayList<Account> list) {
+    public static int findMaxID(ArrayList<Account> accList) {
         int max = 0;
-        for (Account acc : list) {
+        for (Account acc : accList) {
             if (acc.getAccountID() > max) {
                 max = acc.getAccountID();
             }

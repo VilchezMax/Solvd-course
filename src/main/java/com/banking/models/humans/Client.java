@@ -7,27 +7,25 @@ import com.banking.models.Account;
 import com.banking.models.Bank;
 import com.banking.models.Tier;
 
-import java.util.ArrayList;
-
 public class Client extends Adult implements IResign {
     //ATTRIBUTES
     private final int clientID;
-    private final int accountID;
+    private final Account account; //TODO: HAVE ACCOUNT OBJECT, NOT ONLY ID.
     private boolean eligibilityForCredit;
     private String mainBranchAddress;
 
     //CONSTRUCTORS
     public Client(int clientID, boolean eligibilityForCredit, String mainBranchAddress) {
         this.clientID = clientID;
-        this.accountID = Account.findMaxID(Bank.getAccountList()) + 1;
+        this.account = Account.findMaxID(Bank.getAccountList()) + 1;
         this.eligibilityForCredit = eligibilityForCredit;
         this.mainBranchAddress = mainBranchAddress;
     }
 
-    public Client(String name, int age, int idNumber, String occupation, int creditScore, int clientID, int accountID, boolean eligibilityForCredit, String mainBranchAddress) {
+    public Client(String name, int age, int idNumber, String occupation, int creditScore, int clientID, Account account, boolean eligibilityForCredit, String mainBranchAddress) {
         super(name, age, idNumber, occupation, creditScore);
         this.clientID = clientID;
-        this.accountID = accountID;
+        this.account = account;
         this.eligibilityForCredit = eligibilityForCredit;
         this.mainBranchAddress = mainBranchAddress;
     }
@@ -38,8 +36,8 @@ public class Client extends Adult implements IResign {
         return clientID;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public Account getAccount() {
+        return account;
     }
 
     public boolean isEligibilityForCredit() {
@@ -66,7 +64,7 @@ public class Client extends Adult implements IResign {
      */
     public static Tier getTierOfClientAccount(Client client) {
         Tier tier = Bank.getAccountList()
-                .get(Account.findIndexByID(client.getAccountID()))
+                .get(Account.findIndexByID(client.getAccount()))
                 .getTier();
 
         return tier;
@@ -78,27 +76,23 @@ public class Client extends Adult implements IResign {
         if (tier != Tier.BRONZE || this.getCreditScore() > 50) {
             isElegible = true;
             System.out.println("With a creditScore of " + this.getCreditScore() + " and a " + tier + " account," + "\n"
-                                + this.getName() + " is elegible for a credit." + "\n"
-                                + "Your tier grants you a discount on interest payments of -"
-                                + tier.getInterestDisc() + "%");
+                    + this.getName() + " is elegible for a credit." + "\n"
+                    + "Your tier grants you a discount on interest payments of -"
+                    + tier.getInterestDisc() + "%");
         }
         return isElegible;
     }
 
+    //TODO: THIS LOGIC BELONGS TO BANK. FROM HERE ONLY CALL BANK METHODS.
     @Override
-    public void resign() throws UnregisteredException{
-        int index=Account.findIndexByID(this.getAccountID());
+    public void resign() throws UnregisteredException {
+        //solvdBank.clearAccount(this.getAccount)
 
-        if (Bank.getAccountList().contains(this)){
-            Bank.getAccountList().remove(index);
+        if () {
+            Bank.getAccountList().remove(this);
         }
-        if (Bank.getAccountIDClientMap().containsKey(Integer.valueOf(this.getAccountID()))){
-            Bank.getAccountIDClientMap().remove(Integer.valueOf(this.getAccountID()),this);
+        if (Bank.getAccountIDClientMap().containsKey(Integer.valueOf(this.getAccount()))) {
+            Bank.getAccountIDClientMap().remove(Integer.valueOf(this.getAccount()), this);
         }
-        System.gc();
-        /*TODO: ASK SERGEI -
-         * How to delete an object from inside? cant write "this = null".
-         * how to delete reference to object so garbage collector deletes it?
-         */
     }
 }
