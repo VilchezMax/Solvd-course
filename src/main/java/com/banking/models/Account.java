@@ -2,7 +2,7 @@ package com.banking.models;
 
 import com.banking.models.humans.Client;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Account {
@@ -85,20 +85,20 @@ public class Account {
     }
 
     //Finds highest ID in Bank list
-    public static int findMaxID(ArrayList<Account> accList) {
-        int max = 0;
-        for (Account acc : accList) {
-            if (acc.getAccountID() > max) {
-                max = acc.getAccountID();
-            }
-        }
-        return max;
-    }
+//    public static int findMaxID(ArrayList<Account> accList) {
+//        int max = 0;
+//        for (Account acc : accList) {
+//            if (acc.getAccountID() > max) {
+//                max = acc.getAccountID();
+//            }
+//        }
+//        return max;
+//    }
 
     //Finds index of accountID in the Bank's list of accounts.
-    public static int findIndexByID(int accountID) {
+    public static int findIndexByID(int accountID, List<Account> accList) {
         int index = -1;
-        for (Account acc : Bank.getAccountList()) {
+        for (Account acc : accList) {
             if (acc.getAccountID() == accountID) {
                 index = Bank.getAccountList().indexOf(acc);
             }

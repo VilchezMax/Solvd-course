@@ -9,25 +9,26 @@ import com.banking.models.Tier;
 
 public class Client extends Adult implements IResign {
     //ATTRIBUTES
+    private Bank bank;
     private final int clientID;
-    private final Account account; //TODO: HAVE ACCOUNT OBJECT, NOT ONLY ID.
+    private final Account account;
     private boolean eligibilityForCredit;
-    private String mainBranchAddress;
 
     //CONSTRUCTORS
-    public Client(int clientID, boolean eligibilityForCredit, String mainBranchAddress) {
+    public Client(Bank bank, int clientID) {
+        super();
+        this.bank = bank;
         this.clientID = clientID;
-        this.account = Account.findMaxID(Bank.getAccountList()) + 1;
-        this.eligibilityForCredit = eligibilityForCredit;
-        this.mainBranchAddress = mainBranchAddress;
+        this.account = new Account(bank.newAccountId());
+        this.eligibilityForCredit =
+
     }
 
-    public Client(String name, int age, int idNumber, String occupation, int creditScore, int clientID, Account account, boolean eligibilityForCredit, String mainBranchAddress) {
+    public Client(String name, int age, int idNumber, String occupation, int creditScore, int clientID) {
         super(name, age, idNumber, occupation, creditScore);
         this.clientID = clientID;
-        this.account = account;
-        this.eligibilityForCredit = eligibilityForCredit;
-        this.mainBranchAddress = mainBranchAddress;
+        this.account = new Account(bank.newAccountId());
+        this.eligibilityForCredit =
     }
 
     //SETTERS & GETTERS
@@ -48,31 +49,17 @@ public class Client extends Adult implements IResign {
         this.eligibilityForCredit = eligibilityForCredit;
     }
 
-    public String getMainBranchAddress() {
-        return mainBranchAddress;
-    }
-
-    public void setMainBranch(String mainBranchAddress) {
-        this.mainBranchAddress = mainBranchAddress;
-    }
-
     //METHODS
-    /*
-     * Checks creditScore of client/Tier of clients account to determine if its eligible for credit.
-     * Access Banks account list, then searches for the account getting the index to search in the list
-     * Then it evaluates the values
-     */
-    public static Tier getTierOfClientAccount(Client client) {
-        Tier tier = Bank.getAccountList()
-                .get(Account.findIndexByID(client.getAccount()))
-                .getTier();
 
+    public Tier getAccountTier() {
+        Tier tier = this.getAccount().getTier();
         return tier;
     }
 
     public boolean checkEligibilityForCredit() {
         boolean isElegible = false;
-        Tier tier = getTierOfClientAccount(this);
+        Tier tier = this.getAccountTier();
+
         if (tier != Tier.BRONZE || this.getCreditScore() > 50) {
             isElegible = true;
             System.out.println("With a creditScore of " + this.getCreditScore() + " and a " + tier + " account," + "\n"
@@ -88,11 +75,11 @@ public class Client extends Adult implements IResign {
     public void resign() throws UnregisteredException {
         //solvdBank.clearAccount(this.getAccount)
 
-        if () {
-            Bank.getAccountList().remove(this);
-        }
-        if (Bank.getAccountIDClientMap().containsKey(Integer.valueOf(this.getAccount()))) {
-            Bank.getAccountIDClientMap().remove(Integer.valueOf(this.getAccount()), this);
-        }
+//        if () {
+//            Bank.getAccountList().remove(this);
+//        }
+//        if (Bank.getAccountIDClientMap().containsKey(Integer.valueOf(this.getAccount()))) {
+//            Bank.getAccountIDClientMap().remove(Integer.valueOf(this.getAccount()), this);
+//        }
     }
 }

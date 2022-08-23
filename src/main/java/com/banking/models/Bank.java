@@ -73,6 +73,7 @@ public class Bank {
     }
 
     //METHODS
+
     public int findAccountByID(int accountID) {
         int index = -1;
         for (Account acc : this.accountList) {
@@ -111,5 +112,15 @@ public class Bank {
         }
     }
 
+    public int newAccountId() {
+        int max = 0;
+        for (Account acc : this.accountList) {
+            if (acc.getAccountID() > max) {
+                max = acc.getAccountID();
+            }
+        }
+        return max + 1;
+    }
 
+    
 }
