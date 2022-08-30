@@ -1,1 +1,0 @@
-10:48:00.201 [main] ERROR com.banking.App - com.banking.exceptions.InvalidOperationException: InvalidOperationException, you have to choose a valid operation
