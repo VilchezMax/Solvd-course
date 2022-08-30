@@ -3,11 +3,10 @@ package com.banking.models.humans;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-//TODO ASK SERGEI: why the parametrized type goes on class name?
 
-public final class BankDoorman<T extends Person> extends BankWorker {
+public final class BankDoorman extends BankWorker {
 
-    Queue<T> bankQueue = new PriorityQueue<T>(100, (T o1, T o2) -> {
+    Queue<Person> bankQueue = new PriorityQueue<Person>(100, (Person o1, Person o2) -> {
 
         /* Priorities:
          * Client vs Guest -> Both clients? Compare Tiers -> Same tier? Compare credit score -> Same conditions? Compare age
@@ -39,17 +38,17 @@ public final class BankDoorman<T extends Person> extends BankWorker {
         return 0;
     });
 
-    public Queue<T> getBankQueue() {
+    public Queue<Person> getBankQueue() {
         return bankQueue;
     }
 
-    public void setBankQueue(Queue<T> bankQueue) {
+    public void setBankQueue(Queue<Person> bankQueue) {
         this.bankQueue = bankQueue;
     }
 
     //Methods
 
-    public int compareAge(T p1, T p2) {
+    public int compareAge(Person p1, Person p2) {
         if (p1.getAge() == p2.getAge()) {
             return 0;
         } else if (p1.getAge() == p2.getAge()) {

@@ -2,7 +2,6 @@ package com.banking.models;
 
 import com.banking.models.humans.Client;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Account {
@@ -35,6 +34,17 @@ public class Account {
 
     //GETTERS & SETTERS
 
+    //Finds index of accountID in the Bank's list of accounts.
+    public static Account findAccountByID(Bank bank, int accountID) {
+        Account account;
+        for (Account acc : bank.getAccountList()) {
+            if (acc.getAccountID() == accountID) {
+                account = bank.getAccountList().indexOf(acc);
+            }
+        }
+        return account;
+    }
+
     public int getAccountID() {
         return accountID;
     }
@@ -64,12 +74,11 @@ public class Account {
         return client;
     }
 
+    //METHODS
+
     public void setClient(Client client) {
         this.client = client;
     }
-
-    //METHODS
-
 
     @Override
     public boolean equals(Object o) {
@@ -77,11 +86,6 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return accountID == account.accountID;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(accountID);
     }
 
     //Finds highest ID in Bank list
@@ -95,14 +99,8 @@ public class Account {
 //        return max;
 //    }
 
-    //Finds index of accountID in the Bank's list of accounts.
-    public static int findIndexByID(int accountID, List<Account> accList) {
-        int index = -1;
-        for (Account acc : accList) {
-            if (acc.getAccountID() == accountID) {
-                index = Bank.getAccountList().indexOf(acc);
-            }
-        }
-        return index;
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountID);
     }
 }

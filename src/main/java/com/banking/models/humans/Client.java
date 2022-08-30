@@ -3,32 +3,48 @@ package com.banking.models.humans;
 
 import com.banking.exceptions.UnregisteredException;
 import com.banking.interfaces.IResign;
-import com.banking.models.Account;
-import com.banking.models.Bank;
-import com.banking.models.Tier;
+import com.banking.models.*;
+
+import java.util.Objects;
 
 public class Client extends Adult implements IResign {
-    //ATTRIBUTES
-    private Bank bank;
     private final int clientID;
     private final Account account;
+    //ATTRIBUTES
+    private Bank bank;
     private boolean eligibilityForCredit;
 
     //CONSTRUCTORS
-    public Client(Bank bank, int clientID) {
+    public Client(Bank bank) {
         super();
         this.bank = bank;
-        this.clientID = clientID;
+        this.clientID = this.hashCode();
         this.account = new Account(bank.newAccountId());
-        this.eligibilityForCredit =
-
+        this.eligibilityForCredit = checkEligibilityForCredit();
     }
 
-    public Client(String name, int age, int idNumber, String occupation, int creditScore, int clientID) {
-        super(name, age, idNumber, occupation, creditScore);
-        this.clientID = clientID;
-        this.account = new Account(bank.newAccountId());
-        this.eligibilityForCredit =
+    public Client(Account account, Bank bank) {
+        super();
+        this.bank = bank;
+        this.clientID = this.hashCode();
+        this.account = account;
+        this.bank = bank;
+        this.eligibilityForCredit = checkEligibilityForCredit();
+    }
+
+    public Client(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore, Account account, Bank bank) {
+        super(name, age, idNumber, occupation, jobSeniority, creditScore);
+        this.clientID = this.hashCode();
+        this.account = account;
+        this.bank = bank;
+        this.eligibilityForCredit = checkEligibilityForCredit();
+    }
+
+    public Client(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore, Account account) {
+        super(name, age, idNumber, occupation, jobSeniority, creditScore);
+        this.clientID = this.hashCode();
+        this.account = account;
+        this.eligibilityForCredit = checkEligibilityForCredit();
     }
 
     //SETTERS & GETTERS
@@ -81,5 +97,10 @@ public class Client extends Adult implements IResign {
 //        if (Bank.getAccountIDClientMap().containsKey(Integer.valueOf(this.getAccount()))) {
 //            Bank.getAccountIDClientMap().remove(Integer.valueOf(this.getAccount()), this);
 //        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getIdNumber());
     }
 }
