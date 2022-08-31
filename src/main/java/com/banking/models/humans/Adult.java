@@ -1,9 +1,11 @@
 package com.banking.models.humans;
 
+import com.banking.interfaces.ISignUp;
+import com.banking.models.Bank;
 import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 
-public class Adult extends Person {
+public class Adult extends Person implements ISignUp {
     //ATTRIBUTES
     private OccupationField occupation;
     private Seniority jobSeniority;
@@ -57,6 +59,11 @@ public class Adult extends Person {
 
     public void setCreditScore(int creditScore) {
         this.creditScore = creditScore;
+    }
+
+    @Override
+    public void signUp(Bank bank) {
+        bank.signingUp(this);
     }
 
 

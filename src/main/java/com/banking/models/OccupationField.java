@@ -17,5 +17,13 @@ public enum OccupationField {
     OccupationField(int creditScoreModifier) {
         this.creditScoreModifier = creditScoreModifier;
     }
+
+    public int getCreditScoreModifier() {
+        return creditScoreModifier;
+    }
+
+    public void setCreditScoreModifier(int creditScoreModifier) {
+        this.creditScoreModifier = creditScoreModifier;
+    }
 }
 

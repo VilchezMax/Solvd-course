@@ -10,12 +10,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.Scanner;
 
 public class App {
-    static Scanner keyboardInput = new Scanner(System.in);
-    static int maxTries;
 
-    static {
-        maxTries = 3;
-    }
+    public static int maxTries = 3;
+    static Scanner keyboardInput = new Scanner(System.in);
 
     public static void main(String[] args) {
         final Logger logger = LogManager.getLogger(App.class);
@@ -24,9 +21,12 @@ public class App {
 
         Bank solvdBank = new Bank();
 
-        //Adds all initial information to bank collections
-        DataBaseAdministrator dba = new DataBaseAdministrator();
+        //Adds all initial information to bank collections with DBA singleton class;
+        DataBaseAdministrator dba = DataBaseAdministrator.getDBA();
         dba.dbMigration(solvdBank);
+
+        logger.info("Welcome to " + solvdBank.getName() + " !\n" + "Please Insert your ID Number to operate:");
+        int idNumber = keyboardInput.nextInt();
 
         //Guest tries to take a credit.
         logger.warn("You are a guest, you need an account to ask for a credit");

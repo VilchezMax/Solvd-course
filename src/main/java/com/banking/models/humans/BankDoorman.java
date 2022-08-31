@@ -1,11 +1,18 @@
 package com.banking.models.humans;
 
+import com.banking.App;
+import com.banking.models.OccupationField;
+import com.banking.models.Seniority;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Scanner;
 
 
 public final class BankDoorman extends BankWorker {
-
+    final Logger logger = LogManager.getLogger(BankDoorman.class);
     Queue<Person> bankQueue = new PriorityQueue<Person>(100, (Person o1, Person o2) -> {
 
         /* Priorities:
@@ -56,5 +63,45 @@ public final class BankDoorman extends BankWorker {
         } else {
             return 1;
         }
+    }
+
+    public <RegularEnumSet> Guest getGuestInfo(int idNumber) {
+        Scanner clientInput = new Scanner(System.in);
+        //    public Guest(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore) {
+        logger.info("Please provide your information");
+        logger.info("Name:");
+        String name = clientInput.nextLine();
+        App.printLine();
+
+        logger.info("Age:");
+        int age = clientInput.nextInt();
+        App.printLine();
+
+        logger.info("Occupation:");
+        OccupationField[] occs = OccupationField.values();
+        for (int i = 0; i < occs.length; i++) {
+            logger.info((i + 1) + " - " + occs[i]);
+        }
+        OccupationField occupation = occs[clientInput.nextInt() - 1];
+        App.printLine();
+
+        logger.info("Seniority:");
+        Seniority seniority = null;
+        if (occupation != OccupationField.UNEMPLOYED) {
+            Seniority[] srty = Seniority.values();
+            for (int i = 0; i < srty.length; i++) {
+                logger.info((i + 1) + " - " + srty[i]);
+            }
+            seniority = srty[clientInput.nextInt() - 1];
+        }
+        App.printLine();
+
+        logger.info("CreditScore:");
+        int creditScore = clientInput.nextInt();
+
+        Guest guest = new Guest(name, age, idNumber, occupation, seniority, creditScore);
+
+        this.bankQueue.add(guest);
+        return guest;
     }
 }

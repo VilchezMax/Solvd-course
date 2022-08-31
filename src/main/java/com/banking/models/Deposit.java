@@ -22,7 +22,7 @@ public class Deposit extends Operation {
 
     //METHODS
     public void deposit(Bank bank) {
-        Account acc = Account.findAccountByID(this.getDestinationAccountID(), bank.getAccountList());
+        Account acc = Account.findAccountByID(bank, destinationAccountID);
         acc.setBalance(acc.getBalance() + this.getAmount());
         this.setAmount(0);
     }
