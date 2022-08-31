@@ -9,8 +9,12 @@ public abstract class Person {
     private int idNumber;
 
     //CONSTRUCTORS
-    public Person(){
+    public Person() {
+        this.name = "";
+        this.age = 18;
+        this.idNumber = (int) Math.random() * 1000000;
     }
+
     public Person(String name, int age, int idNumber) {
         this.name = name;
         this.age = age;
@@ -48,7 +52,7 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return  "Person {" +
+        return "Person {" +
                 "Name= " + this.name + '\n' +
                 "Age= " + this.age + '\n' +
                 "ID= " + this.idNumber +

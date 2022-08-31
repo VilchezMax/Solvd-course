@@ -2,11 +2,11 @@ package com.banking.models;
 
 public enum Tier {
 
-    SOLVD(1,5, 400, 3),
-    GOLDEN(2,3, 300, 2),
-    SILVER(3,1, 200, 1),
-    BRONZE(4,0, 100, 1);
-    //GUEST(5,0,0,0); TODO define if guests have account null = tier.guest
+    SOLVD(1, 5, 400, 3),
+    GOLDEN(2, 3, 300, 2),
+    SILVER(3, 1, 200, 1),
+    BRONZE(4, 0, 100, 1),
+    GUEST(5, 0, 0, 0);
 
     private int priority;
     private int interestDisc;
@@ -14,7 +14,7 @@ public enum Tier {
     private int maxAmountMultiplier;
 
     private Tier(int priority, int interestDisc, int maxScore, int maxAmountMultiplier) {
-        this.priority=priority;
+        this.priority = priority;
         this.interestDisc = interestDisc;
         this.maxScore = maxScore;
         this.maxAmountMultiplier = maxAmountMultiplier;

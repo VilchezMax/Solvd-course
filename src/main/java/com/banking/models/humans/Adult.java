@@ -1,39 +1,56 @@
 package com.banking.models.humans;
 
-import java.util.Objects;
+import com.banking.interfaces.ISignUp;
+import com.banking.models.Bank;
+import com.banking.models.OccupationField;
+import com.banking.models.Seniority;
 
-public class Adult extends Person{
+public class Adult extends Person implements ISignUp {
     //ATTRIBUTES
-    private String occupation;
+    private OccupationField occupation;
+    private Seniority jobSeniority;
     private int creditScore;
 
     //CONSTRUCTORS
-    public Adult(){
+    public Adult() {
         super();
-        this.setName("");
-        this.setAge(18);
-        this.setIdNumber((int) Math.random()*1000000);
-        this.occupation="Unemployed";
-        if(this.getOccupation().equals("Unemployed")){
-            this.creditScore=0;
+        this.occupation = OccupationField.UNEMPLOYED;
+        this.jobSeniority = null;
+        if (this.getOccupation().equals(OccupationField.UNEMPLOYED)) {
+            this.creditScore = 0;
         } else {
-            this.creditScore=10;
+            this.creditScore = 10;
         }
     }
-    public Adult(String name, int age, int idNumber, String occupation, int creditScore) {
+
+    public Adult(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore) {
         super(name, age, idNumber);
         this.occupation = occupation;
-        this.creditScore = creditScore;
+        if (!this.getOccupation().equals(OccupationField.UNEMPLOYED)) {
+            this.creditScore = creditScore;
+            this.jobSeniority = jobSeniority;
+        } else {
+            this.creditScore = 0;
+            this.jobSeniority = null;
+        }
     }
 
     //SETTERS & GETTERS
 
-    public String getOccupation() {
+    public OccupationField getOccupation() {
         return occupation;
     }
 
-    public void setOccupation(String occupation) {
+    public void setOccupation(OccupationField occupation) {
         this.occupation = occupation;
+    }
+
+    public Seniority getJobSeniority() {
+        return jobSeniority;
+    }
+
+    public void setJobSeniority(Seniority jobSeniority) {
+        this.jobSeniority = jobSeniority;
     }
 
     public int getCreditScore() {
@@ -44,18 +61,11 @@ public class Adult extends Person{
         this.creditScore = creditScore;
     }
 
+    @Override
+    public void signUp(Bank bank) {
+        bank.signingUp(this);
+    }
+
 
     //METHODS
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Adult adult = (Adult) o;
-        return creditScore == adult.creditScore;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(creditScore);
-    }
 }

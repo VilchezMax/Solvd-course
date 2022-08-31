@@ -3,6 +3,7 @@ package com.banking.models;
 import com.banking.exceptions.UnregisteredException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -10,14 +11,37 @@ public class Operation {
     private final int opID;
     double amount;
 
-    public Operation(){
-        this.opID=Operation.findMaxID(Bank.getOperationList())+1;
-        this.amount=0;
+    public Operation() {
+        this.opID = Operation.findMaxID(Bank.getOperationList()) + 1;
+        this.amount = 0;
     }
 
     public Operation(int opID, double amount) {
         this.opID = opID;
         this.amount = amount;
+    }
+
+    public static int findMaxID(ArrayList<Operation> list) {
+        int max = 0;
+        for (Operation op : list) {
+            if (op.getOpID() > max) {
+                max = op.getOpID();
+            }
+        }
+        return max;
+    }
+
+    public Operation findOperationByID(Bank bank, int opId) throws UnregisteredException {
+        Operation operation = (Operation) bank.getOperationList()
+                .stream()
+                .filter(opt -> opt.getOpID() == opId);
+
+        if (operation == null) {
+            Throwable e = new UnregisteredException();
+            final Logger logger = LogManager.getLogger(Operation.class);
+            logger.warn("Operation " + opID + " not found\n", e);
+        }
+        return operation;
     }
 
     public int getOpID() {
@@ -43,29 +67,5 @@ public class Operation {
     @Override
     public int hashCode() {
         return Objects.hash(opID);
-    }
-    public static int findMaxID(ArrayList<Operation> list){
-        int max=0;
-        for (Operation op:list){
-            if (op.getOpID()>max){
-                max=op.getOpID();
-            }
-        }
-        return max;
-    }
-    //Finds index of operationID in the Bank's list of OperationIDs
-    public static int findIndexByID(int opID)  throws UnregisteredException {
-        int index=-1;
-        for(Operation op:Bank.getOperationList()){
-            if(op.getOpID()==opID){
-                index=Bank.getOperationList().indexOf(op);
-            }
-        }
-        if(index==-1){
-            Throwable e = new UnregisteredException();
-            final Logger logger = LogManager.getLogger(Operation.class);
-            logger.warn("Operation "+opID+" not found\n",e);
-        }
-        return index;
     }
 }
