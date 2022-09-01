@@ -1,11 +1,11 @@
-package com.customlinkedlist.linkedlist;
+package hometasks.hw6customlinkedlist;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class CustomLinkedList<T> implements Iterable {
+public class CustomLinkedList implements Iterable {
     //Attributes
     private Node firstNode;
     private List<Node> nodeList;
@@ -26,11 +26,11 @@ public class CustomLinkedList<T> implements Iterable {
     //Setters & Getters
 
     //Methods
-    public <T> getFirst() {
+    public Object getFirst() {
         return this.getFirstNode().getData();
     }
 
-    public <T> getLast() {
+    public Object getLast() {
         return this.getLastNode().getData();
     }
 

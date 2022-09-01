@@ -1,4 +1,4 @@
-package com.customlinkedlist.linkedlist;
+package hometasks.hw6customlinkedlist;
 
 public class Node<T> {
     //Attributes
