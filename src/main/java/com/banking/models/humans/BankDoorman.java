@@ -45,26 +45,17 @@ public final class BankDoorman extends BankWorker {
         return 0;
     });
 
+    //Constructor
     public Queue<Person> getBankQueue() {
         return bankQueue;
     }
 
+    //Setter
     public void setBankQueue(Queue<Person> bankQueue) {
         this.bankQueue = bankQueue;
     }
 
     //Methods
-
-    public int compareAge(Person p1, Person p2) {
-        if (p1.getAge() == p2.getAge()) {
-            return 0;
-        } else if (p1.getAge() == p2.getAge()) {
-            return -1;
-        } else {
-            return 1;
-        }
-    }
-
     public <RegularEnumSet> Guest getGuestInfo(int idNumber) {
         Scanner clientInput = new Scanner(System.in);
         //    public Guest(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore) {
@@ -103,5 +94,14 @@ public final class BankDoorman extends BankWorker {
 
         this.bankQueue.add(guest);
         return guest;
+    }
+
+    public int compareAge(Person p1, Person p2) {
+        if (p1.getAge() == p2.getAge()) {
+            return 0;
+        } else if (p1.getAge() > p2.getAge()) {
+            return -1;
+        }
+        return 1;
     }
 }
