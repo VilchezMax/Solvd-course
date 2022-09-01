@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>vilchezmax</name>
-    <url>http://www.github.com/VilchezMax/Solvd-course</url>
+    <url>https://www.github.com/VilchezMax/Solvd-course</url>
 
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
@@ -22,21 +22,17 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
+        <!--   LOGGER     -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.18.0</version>
-            <scope>import</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.18.0</version>
-            <scope>import</scope>
         </dependency>
-
         <!--   File Utils     -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -49,14 +45,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
         </dependency>
-
+        <!--    Collection Utils    -->
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.2</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -65,7 +59,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.10.1</version>
                 </plugin>
 
                 <plugin>
