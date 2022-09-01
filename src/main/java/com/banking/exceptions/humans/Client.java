@@ -68,8 +68,7 @@ public class Client extends Person implements IResign {
     //METHODS
 
     public Tier getAccountTier() {
-        Tier tier = this.getAccount().getTier();
-        return tier;
+        return this.getAccount().getTier();
     }
 
     public boolean checkEligibilityForCredit() {
