@@ -1,6 +1,7 @@
 package com.banking;
 
 import com.banking.models.Bank;
+import com.banking.models.Message;
 import com.banking.models.humans.BankWorker;
 import com.banking.models.humans.DataBaseAdministrator;
 import com.banking.models.humans.Guest;
@@ -25,7 +26,8 @@ public class App {
         DataBaseAdministrator dba = DataBaseAdministrator.getDBA();
         dba.dbMigration(solvdBank);
 
-        logger.info("Welcome to " + solvdBank.getName() + " !\n" + "Please Insert your ID Number to operate:");
+        logger.info(Message.GREETING.emphaticMessage());
+        logger.info("Please Insert your ID Number to operate:");
         int idNumber = keyboardInput.nextInt();
 
         //Guest tries to take a credit.

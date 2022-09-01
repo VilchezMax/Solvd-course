@@ -1,12 +1,12 @@
 package com.banking.models;
 
 public enum Message {
-    GREETING("Welcome to our bank!"),
-    FAREWELL("Thank you for ");
+    GREETING("¡ Welcome to our bank !"),
+    FAREWELL("¡ Thank you for trusting us ! Come again soon.");
 
     private String message;
 
-    private Messages(String message) {
+    private Message(String message) {
         this.message = message;
     }
 
@@ -18,7 +18,7 @@ public enum Message {
         this.message = message;
     }
 
-    public String emphaticMessage(Message msg){
-        return StringUtils.toU
+    public String emphaticMessage() {
+        return this.getMessage().toUpperCase();
     }
 }
