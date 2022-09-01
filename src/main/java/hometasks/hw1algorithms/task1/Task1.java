@@ -1,4 +1,4 @@
-package homework1.task1;
+package hometasks.hw1algorithms.task1;
 /*
 1) Task 1
 Create simple java class with main method that prints some text.
@@ -8,14 +8,15 @@ Compile and run your class from command line.
 
 public class Task1 {
     public static void main(String[] args) {
-        for(String arg:args) {
+        for (String arg : args) {
             System.out.println("Print this:" + arg);
         }
 
     }
-        //Alternative
-        public static void main2(String[] args2) {
-        for(int i=0;i<args2.length;i++) {
+
+    //Alternative
+    public static void main2(String[] args2) {
+        for (int i = 0; i < args2.length; i++) {
             System.out.println("Print this:" + args2[i]);
         }
 
