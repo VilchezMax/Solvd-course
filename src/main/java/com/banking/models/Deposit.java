@@ -1,6 +1,6 @@
 package com.banking.models;
 
-public class Deposit extends Operation{
+public class Deposit extends Operation {
     //ATTRIBUTES
     int destinationAccountID;
 
@@ -21,9 +21,9 @@ public class Deposit extends Operation{
     }
 
     //METHODS
-    public void deposit(){
-        Account acc = Bank.getAccountList().get(Account.findIndexByID(this.destinationAccountID));
-        acc.setBalance(acc.getBalance()+this.getAmount());
+    public void deposit(Bank bank) {
+        Account acc = Account.findAccountByID(bank, destinationAccountID);
+        acc.setBalance(acc.getBalance() + this.getAmount());
         this.setAmount(0);
     }
 }

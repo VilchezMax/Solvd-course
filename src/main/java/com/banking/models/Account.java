@@ -1,8 +1,10 @@
 package com.banking.models;
 
+import com.banking.exceptions.UnregisteredException;
 import com.banking.models.humans.Client;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Account {
@@ -12,15 +14,16 @@ public class Account {
     private double balance;
     private Client client = null;
 
+
     //CONSTRUCTOR
-    public Account(int accountID) {
-        this.accountID = accountID;
+    public Account() {
+        this.accountID = Account.newAccountId();
         this.tier = Tier.BRONZE;
         this.balance = 0;
     }
 
-    public Account(int accountID, Tier tier, double balance) {
-        this.accountID = accountID;
+    public Account(Tier tier, double balance) {
+        this.accountID = Account.newAccountId();
         this.tier = tier;
         this.balance = balance;
     }
@@ -32,8 +35,25 @@ public class Account {
         this.client = client;
     }
 
+    // GETTERS & SETTERS
 
-    //GETTERS & SETTERS
+    //METHODS
+    public static Account findAccountByID(Bank bank, int accountID) {
+        Account account = (Account) bank.getAccountList()
+                .stream()
+                .filter(acc -> acc.getAccountID() == accountID);
+
+        if (account == null) {
+            Throwable e = new UnregisteredException();
+            final Logger logger = LogManager.getLogger(Operation.class);
+            logger.warn("Operation " + accountID + " not found\n", e);
+        }
+        return account;
+    }
+
+    public static int newAccountId() {
+        return Bank.generateAccountID();
+    }
 
     public int getAccountID() {
         return accountID;
@@ -55,9 +75,8 @@ public class Account {
         return balance;
     }
 
-    public double setBalance(double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
-        return balance;
     }
 
     public Client getClient() {
@@ -67,9 +86,6 @@ public class Account {
     public void setClient(Client client) {
         this.client = client;
     }
-
-    //METHODS
-
 
     @Override
     public boolean equals(Object o) {
@@ -82,27 +98,5 @@ public class Account {
     @Override
     public int hashCode() {
         return Objects.hash(accountID);
-    }
-
-    //Finds highest ID in Bank list
-    public static int findMaxID(ArrayList<Account> accList) {
-        int max = 0;
-        for (Account acc : accList) {
-            if (acc.getAccountID() > max) {
-                max = acc.getAccountID();
-            }
-        }
-        return max;
-    }
-
-    //Finds index of accountID in the Bank's list of accounts.
-    public static int findIndexByID(int accountID) {
-        int index = -1;
-        for (Account acc : Bank.getAccountList()) {
-            if (acc.getAccountID() == accountID) {
-                index = Bank.getAccountList().indexOf(acc);
-            }
-        }
-        return index;
     }
 }

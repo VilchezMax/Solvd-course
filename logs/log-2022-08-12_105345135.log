@@ -1,3 +1,0 @@
-10:53:45.361 [main] INFO  com.banking.App - Entering application.
-10:53:45.370 [main] WARN  com.banking.App - You are a guest, you need an account to ask for a credit
-10:53:45.372 [main] INFO  com.banking.App - com.banking.exceptions.InvalidOperationException: InvalidOperationException, you have to choose a valid operation

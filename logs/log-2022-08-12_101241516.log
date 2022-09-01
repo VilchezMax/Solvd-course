@@ -1,6 +1,0 @@
-10:12:41.683 [main] INFO  com.banking.App - Entering application.
-10:12:41.688 [main] WARN  com.banking.App - You are a guest, you need an account to ask for a credit
-com.banking.exceptions.InvalidOperationException: InvalidOperationException, you have to choose a valid operation
-	at com.banking.App.main(App.java:36) ~[classes/:?]
-10:12:52.407 [main] POLICE com.banking.App - Inform POLICE of $10001.0 movement
-10:12:52.408 [main] INFO  com.banking.App - Exiting application.
