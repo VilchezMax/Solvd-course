@@ -5,8 +5,8 @@ public class Deposit extends Operation {
     int destinationAccountID;
 
     //CONSTRUCTOR
-    public Deposit(int destinationAccountID) {
-        super();
+    public Deposit(Bank bank, int destinationAccountID) {
+        super(bank);
         this.destinationAccountID = destinationAccountID;
     }
 

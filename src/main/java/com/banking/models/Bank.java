@@ -252,18 +252,18 @@ public class Bank {
                         logger.info("Your credit score is too low");
                     } else {
                         logger.info("The credit process is on track.");
-                        Credit credit1 = new Credit(client.getAccount().getAccountID());
+                        Credit credit = new Credit(this, client.getAccount().getAccountID());
                         App.printLine();
 
                         //STEP 1: CHOOSE AMOUNT
-                        logger.info("Max amount is " + Credit.calculateMaxAmount(account.getAccountID())
+                        logger.info("Max amount is " + Credit.calculateMaxAmount(this, account.getAccountID())
                                 + ". How much do you want to borrow?");
                         int tries = 0;
                         int creditAmount = 0;
                         while (tries < App.maxTries) {
                             try {
                                 creditAmount = input.nextInt();
-                                if (creditAmount > Credit.calculateMaxAmount(account.getAccountID())) {
+                                if (creditAmount > Credit.calculateMaxAmount(this, account.getAccountID())) {
                                     throw new AmountException();
                                 }
                                 break;
@@ -285,8 +285,8 @@ public class Bank {
                         int months = input.nextInt();
                         App.printLine();
 
-                        logger.info("Installments will be: " + Credit.calculateInstallment(
-                                creditAmount, account.getAccountID(), credit1.getMonthlyInterest(), months, credit1
+                        logger.info("Installments will be: " + Credit.calculateInstallment(this,
+                                creditAmount, account.getAccountID(), credit.getMonthlyInterest(this), months, credit
                         ) + "/month");
                         App.printLine();
 
@@ -301,7 +301,7 @@ public class Bank {
                 case 3: //DEPOSIT
                     App.printLine();
                     logger.info("Deposit into your account");
-                    Deposit deposit = new Deposit(account.getAccountID());
+                    Deposit deposit = new Deposit(this, account.getAccountID());
                     logger.info("How much?");
                     amount = input.nextDouble();
                     logger.info("Old balance=" + account.getBalance());
@@ -319,10 +319,10 @@ public class Bank {
                     App.printLine();
                     logger.info("What is the account on the receiving end?");
                     int destinationAccount = input.nextInt();
-                    Transfer transfer1 = new Transfer(account.getAccountID(), destinationAccount);
+                    Transfer transfer1 = new Transfer(this, account.getAccountID(), destinationAccount);
                     logger.info("How much? Maximum is: " + transfer1.getMaxAmount());
                     amount = input.nextDouble();
-                    transfer1.transfer(amount);
+                    transfer1.transfer(this, amount);
                     App.printLine();
                     logger.info("$" + amount + " sent to Account " + destinationAccount);
                     App.printLine();

@@ -1,6 +1,6 @@
 package com.banking.models;
 
-public class Credit extends Operation{
+public class Credit extends Operation {
     //ATTRIBUTES
     int borrowingAccountID;
     double maxAmount;
@@ -9,11 +9,10 @@ public class Credit extends Operation{
 
     //CONSTRUCTOR
 
-    public Credit(int borrowingAccountID) {
+    public Credit(Bank bank, int borrowingAccountID) {
+        super(bank);
         this.borrowingAccountID = borrowingAccountID;
-        this.maxAmount = calculateMaxAmount(borrowingAccountID);
-        this.installments = installments;
-        this.monthlyInterest = monthlyInterest;
+        this.maxAmount = calculateMaxAmount(bank, borrowingAccountID);
     }
 
 
@@ -43,15 +42,15 @@ public class Credit extends Operation{
         this.installments = installments;
     }
 
-    public double getMonthlyInterest() {
-        Account acc=Bank.getAccountList().get(Account.findIndexByID(this.borrowingAccountID));
-        Tier tier=acc.getTier();
-        monthlyInterest-=tier.getInterestDisc();
+    public double getMonthlyInterest(Bank bank) {
+        Account acc = Account.findAccountByID(bank, this.borrowingAccountID);
+        Tier tier = acc.getTier();
+        monthlyInterest -= tier.getInterestDisc();
         return monthlyInterest;
     }
 
     public void setMonthlyInterest(double monthlyInterest) {
-        if (monthlyInterest>5) {
+        if (monthlyInterest > 5) {
             this.monthlyInterest = monthlyInterest;
         } else {
             throw new IllegalArgumentException("interest has to be higher that 5%");
@@ -59,16 +58,16 @@ public class Credit extends Operation{
     }
 
     //METHODS
-    public static double calculateMaxAmount(int borrowingAccountID) {
+    public static double calculateMaxAmount(Bank bank, int borrowingAccountID) {
         double maxAmount = 0;
-        Account acc = Bank.getAccountList().get(Account.findIndexByID(borrowingAccountID));
+        Account acc = Account.findAccountByID(bank, borrowingAccountID);
         Tier tier = acc.getTier();
         maxAmount = acc.getBalance() * tier.getMaxAmountMultiplier();
         return maxAmount;
     }
 
-    public static double calculateInstallment(int amount,int borrowingAccountID, double monthlyInterest,int months,Credit credit){
-        double insta=(amount/months)+((amount/months)*credit.getMonthlyInterest());
+    public static double calculateInstallment(Bank bank, int amount, int borrowingAccountID, double monthlyInterest, int months, Credit credit) {
+        double insta = (amount / months) + ((amount / months) * credit.getMonthlyInterest(bank));
         return insta;
     }
 

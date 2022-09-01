@@ -1,18 +1,19 @@
 package com.banking.models;
 
-public class Transfer extends Operation{
-         //ATTRIBUTES
-        int originAccountID;
-        int destinationAccountID;
-        double maxAmount;
+public class Transfer extends Operation {
+    //ATTRIBUTES
+    int originAccountID;
+    int destinationAccountID;
+    double maxAmount;
 
-        //CONSTRUCTOR
+    //CONSTRUCTOR
 
-    public Transfer(int originAccountID, int destinationAccountID) {
-            this.originAccountID = originAccountID;
-            this.destinationAccountID = destinationAccountID;
-            this.maxAmount = Bank.getAccountList().get(Account.findIndexByID(originAccountID)).getBalance();;
-        }
+    public Transfer(Bank bank, int originAccountID, int destinationAccountID) {
+        super(bank);
+        this.originAccountID = originAccountID;
+        this.destinationAccountID = destinationAccountID;
+        this.maxAmount = Account.findAccountByID(bank, originAccountID).getBalance();
+    }
 
 
     //SETTERS & GETTERS
@@ -42,16 +43,14 @@ public class Transfer extends Operation{
     }
 
     //METHODS
-    public void transfer(double amount){
-            Account accOrigin=Bank.getAccountList().get(
-                              Account.findIndexByID(originAccountID));
-            Account accDestination=Bank.getAccountList().get(
-                              Account.findIndexByID(destinationAccountID));
-            if (amount<this.maxAmount){
-                accOrigin.setBalance(accOrigin.getBalance()-amount);
-                accDestination.setBalance(accDestination.getBalance()+amount);
-            } else {
-                throw new IllegalArgumentException("Amount transferred can't be larger than account balance");
-            }
+    public void transfer(Bank bank, double amount) {
+        Account accOrigin = Account.findAccountByID(bank, originAccountID);
+        Account accDestination = Account.findAccountByID(bank, destinationAccountID);
+        if (amount < this.maxAmount) {
+            accOrigin.setBalance(accOrigin.getBalance() - amount);
+            accDestination.setBalance(accDestination.getBalance() + amount);
+        } else {
+            throw new IllegalArgumentException("Amount transferred can't be larger than account balance");
+        }
     }
 }
