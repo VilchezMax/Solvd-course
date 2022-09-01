@@ -5,7 +5,7 @@ import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 import com.banking.models.Tier;
 
-public class Guest extends Adult {
+public class Guest extends Person {
     //ATTRIBUTES
     private final boolean elegibilityForCredit;
     private final Tier tier;

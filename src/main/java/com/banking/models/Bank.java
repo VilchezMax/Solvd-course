@@ -3,10 +3,10 @@ package com.banking.models;
 
 import com.banking.App;
 import com.banking.exceptions.AmountException;
-import com.banking.models.humans.Adult;
 import com.banking.models.humans.BankWorker;
 import com.banking.models.humans.Client;
 import com.banking.models.humans.Guest;
+import com.banking.models.humans.Person;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -349,8 +349,8 @@ public class Bank {
         this.accountIDClientMap.put(newClient.getAccount().getAccountID(), newClient);
     }
 
-    public void signingUp(Adult adult) {
-        Client newClient = new Client(adult.getName(), adult.getAge(), adult.getIdNumber(), adult.getOccupation(), adult.getJobSeniority(), adult.getCreditScore(), new Account());
+    public void signingUp(Person person) {
+        Client newClient = new Client(person.getName(), person.getAge(), person.getIdNumber(), person.getOccupation(), person.getJobSeniority(), person.getCreditScore(), new Account());
         this.accountList.add(newClient.getAccount());
         this.accountIDClientMap.put(newClient.getAccount().getAccountID(), newClient);
     }

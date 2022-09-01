@@ -13,7 +13,9 @@ import java.util.Scanner;
 
 public final class BankDoorman extends BankWorker {
     final Logger logger = LogManager.getLogger(BankDoorman.class);
-    Queue<Person> bankQueue = new PriorityQueue<Person>(100, (Person o1, Person o2) -> {
+
+    //Attributes
+    Queue<Person> bankQueue = new PriorityQueue<>(100, (Person o1, Person o2) -> {
 
         /* Priorities:
          * Client vs Guest -> Both clients? Compare Tiers -> Same tier? Compare credit score -> Same conditions? Compare age
@@ -22,9 +24,9 @@ public final class BankDoorman extends BankWorker {
         if (o1 instanceof Client && o2 instanceof Client) {
             if (((Client) o1).getAccountTier().getPriority()
                     == ((Client) o2).getAccountTier().getPriority()) {
-                if (((Client) o1).getCreditScore() == ((Client) o2).getCreditScore()) {
-                    compareAge(o1, o2);
-                } else if (((Client) o1).getCreditScore() > ((Client) o2).getCreditScore()) {
+                if (o1.getCreditScore() == o2.getCreditScore()) {
+                    return compareAge(o1, o2);
+                } else if (o1.getCreditScore() > o2.getCreditScore()) {
                     return -1;
                 } else {
                     return 1;
@@ -35,14 +37,13 @@ public final class BankDoorman extends BankWorker {
             } else {
                 return 1;
             }
-        } else if (o1 instanceof Client && !(o2 instanceof Client)) {
+        } else if (o1 instanceof Client && o2 instanceof Guest) {
             return -1;
-        } else if (!(o1 instanceof Client) && o2 instanceof Client) {
+        } else if (o1 instanceof Guest && o2 instanceof Client) {
             return 1;
         } else {
-            compareAge(o1, o2);
+            return compareAge(o1, o2);
         }
-        return 0;
     });
 
     //Constructor
@@ -56,7 +57,7 @@ public final class BankDoorman extends BankWorker {
     }
 
     //Methods
-    public <RegularEnumSet> Guest getGuestInfo(int idNumber) {
+    public Guest getGuestInfo(int idNumber) {
         Scanner clientInput = new Scanner(System.in);
         //    public Guest(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore) {
         logger.info("Please provide your information");

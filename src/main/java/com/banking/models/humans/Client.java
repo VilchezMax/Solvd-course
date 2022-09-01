@@ -7,7 +7,7 @@ import com.banking.models.*;
 
 import java.util.Objects;
 
-public class Client extends Adult implements IResign {
+public class Client extends Person implements IResign {
     private final int clientID;
     private final Account account;
     //ATTRIBUTES
