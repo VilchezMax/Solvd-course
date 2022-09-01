@@ -171,15 +171,14 @@ public class Bank {
     }
 
     public void increaseMinimumWages() {
-        Optional<Double> minimumWage = this.bankWorkerSet.stream()
+        Double minimumWage = this.bankWorkerSet.stream()
                 .map(BankWorker::getWage)
-                .min(Double::compare);
+                .min(Double::compare)
+                .get();
 
         this.bankWorkerSet.stream()
-                .filter(worker -> worker.getWage() == minimumWage)
-                .forEach(worker -> {
-                    return worker.setWage((worker.getWage()) * 1.05);
-                });
+                .filter(worker -> minimumWage.compareTo(worker.getWage()) == 0)
+                .forEach(worker -> worker.setWage((worker.getWage()) * 1.05));
     }
 
     public void increaseAllWages() {
@@ -201,20 +200,21 @@ public class Bank {
                 });
     }
 
-    public int findIndexByID(int accountID) {
-        int index = -1;
-        for (Account acc : this.getAccountList()) {
-            if (acc.getAccountID() == accountID) {
-                index = this.getAccountList().indexOf(acc);
-            }
-        }
-        return index;
-    }
+//    public int findIndexByID(int accountID) {
+//        int index = -1;
+//        for (Account acc : this.getAccountList()) {
+//            if (acc.getAccountID() == accountID) {
+//                index = this.getAccountList().indexOf(acc);
+//            }
+//        }
+//        return index;
+//    }
 
-    public Adult isClientOrGuest(Bank bank, int idNumber) {
-        bank.getAccountIDClientMap().values()
+    public boolean isClientOrGuest(Bank bank, int idNumber) {
+        return bank.getAccountIDClientMap()
+                .values()
                 .stream()
-                .filter(client -> client.getIdNumber() == idNumber);
+                .anyMatch(client -> client.getIdNumber() == idNumber);
     }
 
 
