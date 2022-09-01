@@ -94,7 +94,6 @@ public abstract class Person implements ISignUp {
     }
 
     //METHODS
-
     //TODO: ABSTRACT METHOD TO JUSTIFY ABSTRACT IN CLASS DECLARATION
     @Override
     public void signUp(Bank bank) {

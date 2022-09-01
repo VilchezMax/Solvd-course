@@ -11,8 +11,8 @@ public class Operation {
     private final int opID;
     double amount;
 
-    public Operation() {
-        this.opID = Operation.findMaxID(Bank.getOperationList()) + 1;
+    public Operation(Bank bank) {
+        this.opID = Operation.findMaxID(bank.getOperationList()) + 1;
         this.amount = 0;
     }
 

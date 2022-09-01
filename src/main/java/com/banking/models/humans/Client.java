@@ -19,7 +19,7 @@ public class Client extends Person implements IResign {
         super();
         this.bank = bank;
         this.clientID = this.hashCode();
-        this.account = new Account(bank.newAccountId());
+        this.account = new Account();
         this.eligibilityForCredit = checkEligibilityForCredit();
     }
 
