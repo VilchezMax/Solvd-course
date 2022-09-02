@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.stream.Stream;
 
@@ -24,6 +25,8 @@ public class Task1Runner {
                             .filter(word -> StringUtils.countMatches(sourceString, word) == 1)
                             .count()
                     ), charset);
+        } catch (FileNotFoundException e) {
+            LOGGER.warn("Error 404: not found." + e);
         } catch (IOException e) {
             LOGGER.warn(e);
         }

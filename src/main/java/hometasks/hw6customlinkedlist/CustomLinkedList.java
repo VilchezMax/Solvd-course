@@ -5,41 +5,38 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class CustomLinkedList implements Iterable {
+public class CustomLinkedList<T> implements Iterable {
     //Attributes
-    private Node firstNode;
+    private Node<T> first;
     private List<Node> nodeList;
-    private Node lastNode;
+    private Node<T> last;
 
     //Constructors
     public CustomLinkedList() {
-        this.firstNode = null;
-        this.lastNode = null;
+        this.first = null;
+        this.last = null;
     }
 
-    public CustomLinkedList(Node node) {
+    public CustomLinkedList(Node<T> node) {
         this.nodeList.add(node);
-        this.firstNode = node;
-        this.lastNode = node;
+        this.first = node;
+        this.last = node;
     }
 
     //Setters & Getters
 
-    //Methods
-    public Object getFirst() {
-        return this.getFirstNode().getData();
+
+    public Node<T> getFirst() {
+        return first;
     }
 
-    public Object getLast() {
-        return this.getLastNode().getData();
-    }
-
-    public Node getFirstNode() {
-        return firstNode;
-    }
-
-    public void setFirstNode(Node firstNode) {
-        this.firstNode = firstNode;
+    public void setFirst(Node<T> first) {
+        if (this.first == null) {
+            this.first = first;
+        } else {
+            this.first.setNextNode(this.first);
+            this.first = first;
+        }
     }
 
     public List<Node> getNodeList() {
@@ -50,13 +47,28 @@ public class CustomLinkedList implements Iterable {
         this.nodeList = nodeList;
     }
 
-    public Node getLastNode() {
-        return lastNode;
+    public Node<T> getLast() {
+        return last;
     }
 
-    public void setLastNode(Node lastNode) {
-        this.lastNode = lastNode;
+    public void setLast(Node lastNode) {
+        if (this.last == null) {
+            this.last = lastNode;
+        } else {
+            this.last.setPreviousNode(this.last);
+            this.last = lastNode;
+        }
     }
+
+    //Methods
+    public T getFirstNodeData() {
+        return this.getFirst().getData();
+    }
+
+    public T getLastNodeData() {
+        return this.getLast().getData();
+    }
+
 
     @Override
     public Iterator iterator() {

@@ -26,7 +26,7 @@ public class App {
         DataBaseAdministrator dba = DataBaseAdministrator.getDBA();
         dba.dbMigration(solvdBank);
 
-        logger.info(Message.GREETING.emphaticMessage());
+        logger.info(Message.GREETING.getMessage());
         logger.info("Please Insert your ID Number to operate:");
         int idNumber = keyboardInput.nextInt();
 
@@ -52,7 +52,7 @@ public class App {
     }
 
     public static void printLine() {
-        System.out.println("-----------------------------------------------------");
+        System.out.println("~----~-----------~----------~----------~------------~----~");
     }
 
 }

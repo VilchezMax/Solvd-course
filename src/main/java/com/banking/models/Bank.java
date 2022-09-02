@@ -16,27 +16,26 @@ import java.util.*;
 public class Bank {
     //ATTRIBUTES
     private final String name;
-    private String network;
     private int bankID;
     private ArrayList<Account> accountList = new ArrayList<>();
     private ArrayList<Operation> operationList = new ArrayList<>();
     private Set<BankWorker> bankWorkerSet = new HashSet<>();
     private Map<Integer, Client> accountIDClientMap = new HashMap<>();
-    private static Set<Integer> allAccountsID = new HashSet<>();    //Static because it's shared through all banks to not repeat accountID for transfers among diff banks.
+
+    //Static because it's shared through all banks to not repeat accountID for transfers among diff banks.
+    private static Set<Integer> allAccountsID = new HashSet<>();
 
     static {
-        final Logger logger = LogManager.getLogger(App.class);
+        final Logger logger = LogManager.getLogger(Bank.class);
     }
 
     //CONSTRUCTOR
     public Bank() {
         this.name = "SolvdBank";
-        this.network = "Banelco";
     }
 
-    public Bank(String name, String network) {
+    public Bank(String name) {
         this.name = name;
-        this.network = network;
     }
 
 
@@ -51,14 +50,6 @@ public class Bank {
 
     public String getName() {
         return name;
-    }
-
-    public String getNetwork() {
-        return network;
-    }
-
-    public void setNetwork(String network) {
-        this.network = network;
     }
 
     public ArrayList<Account> getAccountList() {
@@ -101,15 +92,21 @@ public class Bank {
     public static int generateAccountID() {
         final Logger logger = LogManager.getLogger(Bank.class);
         int maxId = 0;
+        if (!Bank.allAccountsID.isEmpty()) {
+            try {
+                maxId = Bank.allAccountsID
+                        .stream()
+                        .mapToInt(Integer::intValue)
+                        .max()
+                        .getAsInt();
 
-        try {
-            maxId = Bank.allAccountsID.stream()
-                    .max(Comparator.naturalOrder())
-                    .get();
-            Bank.allAccountsID.add(maxId);
-            return maxId + 1;
-        } catch (NoSuchElementException e) {
-            logger.warn("No se pudo encontrar el id maximo de las cuentas" + e);
+                Bank.allAccountsID.add(maxId + 1);
+                System.out.println(maxId);
+                return maxId + 1;
+
+            } catch (NoSuchElementException e) {
+                logger.warn("No se pudo encontrar el id maximo de las cuentas. " + e);
+            }
         }
         return maxId;
     }

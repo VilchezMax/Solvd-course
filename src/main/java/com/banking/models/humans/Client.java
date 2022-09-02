@@ -77,10 +77,10 @@ public class Client extends Person implements IResign {
 
         if (tier != Tier.BRONZE || this.getCreditScore() > 50) {
             isElegible = true;
-            System.out.println("With a creditScore of " + this.getCreditScore() + " and a " + tier + " account," + "\n"
-                    + this.getName() + " is elegible for a credit." + "\n"
-                    + "Your tier grants you a discount on interest payments of -"
-                    + tier.getInterestDisc() + "%");
+//            System.out.println("With a creditScore of " + this.getCreditScore() + " and a " + tier + " account," + "\n"
+//                    + this.getName() + " is elegible for a credit." + "\n"
+//                    + "Your tier grants you a discount on interest payments of -"
+//                    + tier.getInterestDisc() + "%");
         }
         return isElegible;
     }
