@@ -62,12 +62,14 @@ public final class DataBaseAdministrator extends BankWorker {
 
                 /* - Operations - */
 
-                //Transfers
+                //Transfers TODO
 
 
-                //Deposits
+                //Deposits TODO
+
+
             } catch (Exception e) {
-
+                logger.info(e);
             }
         }
         DataBaseAdministrator.migrations++;

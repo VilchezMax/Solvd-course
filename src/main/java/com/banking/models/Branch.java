@@ -1,13 +1,12 @@
 package com.banking.models;
 
 
-
 import com.banking.models.humans.Client;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Branch extends Bank{
+public class Branch extends Bank {
     //ATTRIBUTES
     private static ArrayList<Client> clientList;
     private String address;
@@ -16,8 +15,9 @@ public class Branch extends Bank{
     public Branch(String address) {
         super();
         this.address = address;
-        this.clientList=new ArrayList<>();
+        this.clientList = new ArrayList<>();
     }
+
     //SETTERS & GETTERS
     public ArrayList<Client> getClientList() {
         return clientList;
