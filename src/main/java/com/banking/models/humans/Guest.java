@@ -30,6 +30,6 @@ public class Guest extends Person {
     //METHODS
 
     public void signUp(Bank bank) {
-        bank.signingUp(this);
+        bank.signUp(this);
     }
 }

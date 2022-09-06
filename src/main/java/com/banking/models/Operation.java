@@ -1,8 +1,6 @@
 package com.banking.models;
 
 import com.banking.exceptions.UnregisteredException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,8 +14,8 @@ public class Operation {
         this.amount = 0;
     }
 
-    public Operation(int opID, double amount) {
-        this.opID = opID;
+    public Operation(Bank bank, double amount) {
+        this.opID = Operation.findMaxID(bank.getOperationList()) + 1;
         this.amount = amount;
     }
 
@@ -31,17 +29,17 @@ public class Operation {
         return max;
     }
 
-    public Operation findOperationByID(Bank bank, int opId) throws UnregisteredException {
-        Operation operation = (Operation) bank.getOperationList()
-                .stream()
-                .filter(opt -> opt.getOpID() == opId);
+    public static int newOperationId(Bank bank) {
+        return bank.generateOperationID();
+    }
 
-        if (operation == null) {
-            Throwable e = new UnregisteredException();
-            final Logger logger = LogManager.getLogger(Operation.class);
-            logger.warn("Operation " + opID + " not found\n", e);
-        }
-        return operation;
+    public Operation findOperationByID(Bank bank, int opId) throws UnregisteredException {
+        return bank.getOperationList()
+                .stream()
+                .filter(opt -> opt.getOpID() == opId)
+                .findFirst()
+                .orElse(null);
+
     }
 
     public int getOpID() {

@@ -1,6 +1,7 @@
 package com.banking.models.humans;
 
 import com.banking.App;
+import com.banking.models.Bank;
 import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 import org.apache.logging.log4j.LogManager;
@@ -46,6 +47,14 @@ public final class BankDoorman extends BankWorker {
         }
     });
 
+    public BankDoorman(Bank bank) {
+        super(bank);
+    }
+
+    public BankDoorman(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore, double wage, Bank bank) {
+        super(name, age, idNumber, occupation, jobSeniority, creditScore, wage, bank);
+    }
+
     //Constructor
     public Queue<Person> getBankQueue() {
         return bankQueue;
@@ -60,7 +69,7 @@ public final class BankDoorman extends BankWorker {
     public Guest getGuestInfo(int idNumber) {
         Scanner clientInput = new Scanner(System.in);
         //    public Guest(String name, int age, int idNumber, OccupationField occupation, Seniority jobSeniority, int creditScore) {
-        logger.info("Please provide your information");
+        logger.info("You are not a client, please provide your information");
         logger.info("Name:");
         String name = clientInput.nextLine();
         App.printLine();
