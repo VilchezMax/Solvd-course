@@ -1,9 +1,6 @@
 package com.banking.models;
 
-import com.banking.exceptions.UnregisteredException;
 import com.banking.models.humans.Client;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
@@ -28,28 +25,23 @@ public class Account {
         this.balance = balance;
     }
 
-    public Account(int accountID, Tier tier, double balance, Client client) {
-        this.accountID = accountID;
+    public Account(Tier tier, double balance, Client client) {
+        this.accountID = Account.newAccountId();
         this.tier = tier;
         this.balance = balance;
         this.client = client;
     }
 
-    // GETTERS & SETTERS
 
     //METHODS
     public static Account findAccountByID(Bank bank, int accountID) {
-        Account account = (Account) bank.getAccountList()
+        return bank.getAccountList()
                 .stream()
-                .filter(acc -> acc.getAccountID() == accountID);
-
-        if (account == null) {
-            Throwable e = new UnregisteredException();
-            final Logger logger = LogManager.getLogger(Operation.class);
-            logger.warn("Operation " + accountID + " not found\n", e);
-        }
-        return account;
+                .filter(acc -> acc.getAccountID() == accountID)
+                .findFirst()
+                .orElse(null);
     }
+
 
     public static int newAccountId() {
         return Bank.generateAccountID();

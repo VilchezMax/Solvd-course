@@ -16,7 +16,8 @@ public final class DataBaseAdministrator extends BankWorker {
     final Logger logger = LogManager.getLogger(DataBaseAdministrator.class);
 
     //Constructors
-    private DataBaseAdministrator() { //Reflection-proof
+    private DataBaseAdministrator(Bank bank) {
+        super(bank); //Reflection-proof
         if (dba != null) {
             throw new RuntimeException("Use getDBA method to get single instance of this class.");
         }
@@ -26,8 +27,8 @@ public final class DataBaseAdministrator extends BankWorker {
 
     //Methods
 
-    public synchronized static DataBaseAdministrator getDBA() { //Thread-safe
-        DataBaseAdministrator dba = new DataBaseAdministrator();
+    public synchronized static DataBaseAdministrator getDBA(Bank bank) { //Thread-safe
+        DataBaseAdministrator dba = new DataBaseAdministrator(bank);
         return dba;
     }
 
@@ -60,6 +61,20 @@ public final class DataBaseAdministrator extends BankWorker {
                 Client client4 = new Client("Celeste Gonzalez", 24, 41414141, OccupationField.MANUFACTURE, Seniority.JUNIOR, 300, bank.getAccountList().get(2), bank);
                 Client client5 = new Client("Julian Schirmer", 23, 40404141, OccupationField.HEALTH, Seniority.TRAINEE, 200, bank.getAccountList().get(1), bank);
 
+                bank.getAccountIDClientMap().put((client1.getAccount().getAccountID()), client1);
+                bank.getAccountIDClientMap().put(client2.getAccount().getAccountID(), client2);
+                bank.getAccountIDClientMap().put(client3.getAccount().getAccountID(), client3);
+                bank.getAccountIDClientMap().put(client4.getAccount().getAccountID(), client4);
+                bank.getAccountIDClientMap().put((client5.getAccount().getAccountID()), client5);
+
+                //BankWorkers
+                CEO ceo = new CEO("Alexey Krusevich", 40, 11111111, OccupationField.BUSINESS, Seniority.PRINCIPAL, 10000, 1000000.00, bank);
+                BankDoorman doorman = new BankDoorman("Angel Di Maria", 35, 2222222, OccupationField.COMMUNICATIONS, Seniority.TRAINEE, 320, 1500.00, bank);
+                BankTeller teller = new BankTeller("Tini Stoessel", 29, 2272222, OccupationField.BUSINESS, Seniority.JUNIOR, 400, 2500.00, bank);
+                bank.getBankWorkerSet().add(ceo);
+                bank.getBankWorkerSet().add(doorman);
+                bank.getBankWorkerSet().add(teller);
+
                 /* - Operations - */
 
                 //Transfers TODO
@@ -67,7 +82,7 @@ public final class DataBaseAdministrator extends BankWorker {
 
                 //Deposits TODO
 
-
+                logger.info("Migration Finished");
             } catch (Exception e) {
                 logger.info(e);
             }

@@ -15,10 +15,6 @@ public enum Message {
         }
     };
 
-
-    private Message() {
-    }
-
     public abstract String getMessage();
 
 }

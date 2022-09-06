@@ -76,6 +76,7 @@ public class reflectionRunner {
                 InstantiationException | IllegalAccessException e) {
             logger.warn(e);
         }
+
         Method toString = constructed.getClass().getMethod("toString");
 
         logger.info("INSTANCE OF BANK CREATED:");

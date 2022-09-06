@@ -7,7 +7,6 @@ package com.banking.interfaces;
 
 import com.banking.exceptions.UnregisteredException;
 
-@FunctionalInterface
 public interface IResign {
     public void resign() throws UnregisteredException;
 }

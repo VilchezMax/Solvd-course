@@ -1,7 +1,6 @@
 package com.banking.models.humans;
 
 import com.banking.interfaces.ISignUp;
-import com.banking.models.Bank;
 import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 
@@ -95,18 +94,13 @@ public abstract class Person implements ISignUp {
 
     //METHODS
     //TODO: ABSTRACT METHOD TO JUSTIFY ABSTRACT IN CLASS DECLARATION
-    @Override
-    public void signUp(Bank bank) {
-        bank.signingUp(this);
-    }
+
 
     @Override
     public String toString() {
-        return "Person {" +
-                "Name= " + this.name + '\n' +
-                "Age= " + this.age + '\n' +
-                "ID= " + this.idNumber +
-                '}';
+        return "| Person: " + this.name + '\n' +
+                "| Age: " + this.age + '\n' +
+                "| ID: " + this.idNumber;
     }
 
     @Override
