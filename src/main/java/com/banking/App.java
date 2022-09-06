@@ -40,8 +40,6 @@ public class App {
             } catch (Exception e) {
                 logger.warn(e);
             }
-
-
         }
         logger.info("Exiting application.");
         System.exit(-1);

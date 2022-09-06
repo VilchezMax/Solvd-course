@@ -355,12 +355,12 @@ public class Bank {
                 Client newClient = this.signUp(guest);
                 logger.info("Your credit score has been increased from " + newClient.getCreditScore() + " to "
                         + this.getBankWorker(CEO.class).signUpCreditScoreBonus(newClient.getClientID()));
+                logger.info("You are being redirected to client homepage");
+                this.clientApp(newClient.getIdNumber());
             }
         } catch (Exception e) {
             logger.warn(e);
         }
-
-
     }
 
     public Client getClientByID(int idNumber) {
