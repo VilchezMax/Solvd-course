@@ -378,5 +378,17 @@ public class Bank {
         return newClient;
     }
 
+    public <T extends BankWorker> void fire(T worker) throws UnregisteredException {
+        if (this.bankWorkerSet.contains(worker)) {
+            this.bankWorkerSet.remove(worker);
+        } else {
+            throw new UnregisteredException();
+        }
+    }
+
+    public <T extends BankWorker> void employ(T worker) {
+        this.bankWorkerSet.add(worker);
+    }
+
 
 }

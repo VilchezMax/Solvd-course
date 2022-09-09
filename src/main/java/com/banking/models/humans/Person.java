@@ -1,12 +1,11 @@
 package com.banking.models.humans;
 
-import com.banking.interfaces.ISignUp;
 import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 
 import java.util.Objects;
 
-public abstract class Person implements ISignUp {
+public abstract class Person {
     //ATTRIBUTES
     private String name;
     private int age;

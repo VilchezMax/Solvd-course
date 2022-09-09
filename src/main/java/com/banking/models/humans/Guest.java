@@ -1,11 +1,12 @@
 package com.banking.models.humans;
 
+import com.banking.interfaces.ISignUp;
 import com.banking.models.Bank;
 import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 import com.banking.models.Tier;
 
-public class Guest extends Person {
+public class Guest extends Person implements ISignUp {
     //ATTRIBUTES
     private final boolean elegibilityForCredit;
     private final Tier tier;

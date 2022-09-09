@@ -3,11 +3,12 @@ package com.banking.models.humans;
 
 import com.banking.exceptions.UnregisteredException;
 import com.banking.interfaces.IResign;
+import com.banking.interfaces.ISignUp;
 import com.banking.models.Bank;
 import com.banking.models.OccupationField;
 import com.banking.models.Seniority;
 
-public class BankWorker extends Person implements IResign {
+public class BankWorker extends Person implements IResign, ISignUp {
     private double wage;
     private Bank bank;
 
@@ -41,15 +42,11 @@ public class BankWorker extends Person implements IResign {
 
     @Override
     public void resign() throws UnregisteredException {
-        /* TODO
-        if(Bank.getBankWorkerSet().contains(this)){
-            Bank.getBankWorkerSet().remove(this);
-            this.setWage(0);
-        } else {
-            throw new UnregisteredException();
-        }
-        */
-
+        bank.fire(this);
     }
 
+    @Override
+    public void signUp(Bank bank) {
+        bank.employ(this);
+    }
 }
