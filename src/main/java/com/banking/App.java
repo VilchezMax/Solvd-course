@@ -1,5 +1,6 @@
 package com.banking;
 
+import com.banking.exceptions.AmountException;
 import com.banking.exceptions.UnregisteredException;
 import com.banking.models.Bank;
 import com.banking.models.Message;
@@ -31,7 +32,7 @@ public class App {
         if (bank.isClient(idNumber)) {
             try {
                 bank.clientApp(idNumber);
-            } catch (UnregisteredException e) {
+            } catch (UnregisteredException | AmountException e) {
                 logger.warn(e);
             }
         } else {

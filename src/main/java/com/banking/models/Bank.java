@@ -197,7 +197,7 @@ public class Bank {
     }
 
     //MAIN FLOW OF THE APP, CALLED FROM MAIN METHOD.
-    public void clientApp(int idNumber) throws UnregisteredException {
+    public void clientApp(int idNumber) throws UnregisteredException, AmountException {
         Scanner input = new Scanner(System.in);
 
         Client client = this.getClientByID(idNumber);
@@ -256,7 +256,7 @@ public class Bank {
                                     throw new AmountException();
                                 }
                                 break;
-                            } catch (InputMismatchException | AmountException e) {
+                            } catch (InputMismatchException e) {
                                 logger.info((App.maxTries - tries) + " tries left.\n" + e);
                                 logger.info("Wrong user input", e);
                                 if (tries == App.maxTries) {
