@@ -1,7 +1,7 @@
 .idea
 logs
 desktop.ini
-SOLVD.iml
+*.iml
 out
 target
 homework.md
